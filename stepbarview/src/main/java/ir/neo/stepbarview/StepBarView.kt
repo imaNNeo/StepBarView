@@ -117,7 +117,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
         stepsSize = DpHandler.dpToPx(context,16).toFloat()
         stepsTextColor = ContextCompat.getColor(context,R.color.sbv_step_text_color)
-        stepsTextSize = DpHandler.spToPx(14f,context)
+        stepsTextSize = DpHandler.spToPx(context,14f)
 
         stepsLineMarginLeft = DpHandler.dpToPx(context,2).toFloat()
         stepsLineMarginRight = DpHandler.dpToPx(context,2).toFloat()

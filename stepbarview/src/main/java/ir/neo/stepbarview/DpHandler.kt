@@ -19,7 +19,11 @@ object DpHandler {
         return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
     }
 
-    fun spToPx(sp: Float, context: Context): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, context.resources.displayMetrics)
+    fun spToPx(ctx: Context, sp: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, ctx.resources.displayMetrics)
+    }
+
+    fun pxToSp(ctx : Context, px : Int): Float {
+        return px / ctx.resources.displayMetrics.scaledDensity
     }
 }

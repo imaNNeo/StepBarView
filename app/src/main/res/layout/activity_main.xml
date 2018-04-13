@@ -4,6 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ir.neo.stepbarviewdemo.MainActivity">
+    tools:context="ir.neo.stepbarviewdemo.MainActivity"
+    android:padding="16dp"
+    >
+
+
+    <ir.neo.stepbarview.StepBarView
+        android:id="@+id/my_stepBarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+    <SeekBar
+        android:id="@+id/sb_attrsValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <Spinner
+        android:id="@+id/sp_actions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/sb_attrsValue"
+        app:layout_constraintRight_toLeftOf="@+id/tv_value"
+        />
+
+    <TextView
+        android:id="@+id/tv_value"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:lines="1"
+        app:layout_constraintLeft_toRightOf="@id/sp_actions"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/sp_actions"
+        app:layout_constraintBottom_toBottomOf="@id/sp_actions"
+        android:layout_marginLeft="6dp"
+        android:text="12 dp"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textSize="14sp"
+        />
+
 
 </android.support.constraint.ConstraintLayout>

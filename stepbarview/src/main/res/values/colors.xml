@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="sbv_step_reached_color">#f99b1c</color>
+    <color name="sbv_step_unreached_color">#d6d6d6</color>
+    <color name="sbv_step_line_reached_color">@color/sbv_step_reached_color</color>
+    <color name="sbv_step_line_unreached_color">@color/sbv_step_unreached_color</color>
+    <color name="sbv_step_text_color">#fff</color>
+
+</resources>

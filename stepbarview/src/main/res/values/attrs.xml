@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="StepBarView">
+        <attr name="sbv_max_count" format="integer"/>
+        <attr name="sbv_steps_reached_colors" format="color"/>
+        <attr name="sbv_steps_unreached_colors" format="color"/>
+        <attr name="sbv_steps_line_reached_colors" format="color"/>
+        <attr name="sbv_steps_line_unreached_colors" format="color"/>
+        <attr name="sbv_steps_line_height" format="dimension"/>
+        <attr name="sbv_steps_size" format="dimension"/>
+        <attr name="sbv_steps_text_color" format="color"/>
+        <attr name="sbv_steps_text_size" format="dimension"/>
+        <attr name="sbv_steps_line_margin_left" format="dimension"/>
+        <attr name="sbv_steps_line_margin_right" format="dimension"/>
+        <attr name="sbv_allow_touch_step_to" format="integer"/>
+    </declare-styleable>
+
+</resources>

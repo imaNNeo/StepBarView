@@ -68,13 +68,13 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
     var stepsLineHeight : Float = 0f
         set(value) {
             field = value
-            invalidate()
+            requestLayout()
         }
 
     var stepsSize : Float = 0f
         set(value) {
             field = value
-            invalidate()
+            requestLayout()
         }
 
     var stepsTextColor : Int = 0

@@ -182,7 +182,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
     }
 
 
-    private fun calculateDesireHeight() = stepsSize
+    private fun calculateDesireHeight() = Math.max(stepsSize,stepsLineHeight)
 
     private fun getStepsLineSize() : Float {
         val allStepsSize = (maxCount * stepsSize)

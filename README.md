@@ -57,24 +57,23 @@ just add ``StepBarView`` in your java code or xml.
 ## View Properties 
 
 ### * in XML
-you can use this properties for make everything you want,
-and all of them is arbitary,and can change via xml or java code/
+you can customize StepBarView, all of this attributes can change via xml or code (runtime)
 
 
 |Attribute|Type|Kotlin|Description|
 |:---:|:---:|:---:|:---:|
-|sbv_max_count|Integer|`maxCount`|by this property you can specify your steps count (max to reach), default value is `8`|
-|sbv_steps_reached_colors|Color|`stepsReachedColor`|by this property you can specify steps reached color (steps circle reached color)|
-|sbv_steps_unreached_colors|Color|`stepsUnreachedColor`|by this property you can specify steps unReached color (steps circle default color)|
-|sbv_steps_line_reached_colors|Color|`stepsLineReachedColor`|by this property you can specify steps line reached color|
-|sbv_steps_line_unreached_colors|Color|`stepsLineUnreachedColor`|by this property you can specify steps line uReached color|
-|sbv_steps_line_height|Dimensions|`stepsLineHeight`|by this property you can specify steps line height, default value is `4dp`|
-|sbv_steps_size|Dimensions|`stepsSize`|by this property you can specify steps circle size, default value is `16dp`|
-|sbv_steps_text_color|Color|`stepsTextColor`|by this property you can specify steps text color (number that drawn on steps circle)|
-|sbv_steps_text_size|Dimensions|`stepsTextSize`|by this property you can specify steps text size, default is `14sp`|
-|sbv_steps_line_margin_left|Dimensions|`stepsLineMarginLeft`|by this property you can specify steps line margin left (gap in left of lines), default value is `2dp`|
-|sbv_steps_line_margin_right|Dimensions|`stepsLineMarginRight`|by this property you can specify steps line margin right (gap in right of lines), default value is `2dp`|
-|sbv_allow_touch_step_to|Integer|`allowTouchStepTo`|by this property you can allow touch to reach step (for example if you set 3 you can touch to reach step to 3 and not more), default value is `8`|
+|sbv_max_count|Integer|`maxCount`|your steps count (max to reach), default value is `8`|
+|sbv_steps_reached_colors|Color|`stepsReachedColor`|steps reached color (steps circle reached color)|
+|sbv_steps_unreached_colors|Color|`stepsUnreachedColor`|steps unReached color (steps circle default color)|
+|sbv_steps_line_reached_colors|Color|`stepsLineReachedColor`|steps line reached color|
+|sbv_steps_line_unreached_colors|Color|`stepsLineUnreachedColor`|steps line uReached color|
+|sbv_steps_line_height|Dimensions|`stepsLineHeight`|steps line height, default value is `4dp`|
+|sbv_steps_size|Dimensions|`stepsSize`|steps circle size, default value is `16dp`|
+|sbv_steps_text_color|Color|`stepsTextColor`|steps text color (number that drawn on steps circle)|
+|sbv_steps_text_size|Dimensions|`stepsTextSize`|steps text size, default is `14sp`|
+|sbv_steps_line_margin_left|Dimensions|`stepsLineMarginLeft`|steps line margin left (gap in left of lines), default value is `2dp`|
+|sbv_steps_line_margin_right|Dimensions|`stepsLineMarginRight`|steps line margin right (gap in right of lines), default value is `2dp`|
+|sbv_allow_touch_step_to|Integer|`allowTouchStepTo`|allow touch to reach step (for example if you set 3 you can touch to reach step to 3 and not more), default value is `8`|
 
 
 # License

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ir.neo.stepbarviewdemo.MainActivity"
-    android:padding="16dp"
     >
 
 
@@ -16,7 +15,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view_separator"
         />
 
 
@@ -54,6 +53,16 @@
         android:gravity="center"
         android:textColor="#000"
         android:textSize="14sp"
+        />
+
+    <View
+        android:id="@+id/view_separator"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        app:layout_constraintLeft_toLeftOf="@id/sp_actions"
+        app:layout_constraintRight_toRightOf="@id/tv_value"
+        app:layout_constraintBottom_toTopOf="@id/sp_actions"
+        android:background="#7b7b7b"
         />
 
 

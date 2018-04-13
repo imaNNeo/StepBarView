@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
         when(actionsList[position]){
             "sbv_max_count" -> {
                 sbAttrsValue.max = 20
-                sbAttrsValue.progress = myStepBarView.maxCount
+                sbAttrsValue.progress = myStepBarView.maxCount-2
                 refreshValueText(sbAttrsValue.progress)
             }
             "sbv_steps_line_height" -> {
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
     private fun refreshValueText(progress: Int) {
         when(actionsList[spActions.selectedItemPosition]){
             "sbv_max_count" -> {
-                tvValue.text = "$progress"
+                tvValue.text = "${progress+2}"
             }
             "sbv_steps_line_height" -> {
                 tvValue.text = "$progress dp"
@@ -131,7 +131,7 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
     private fun refreshProgress(progress: Int) {
         when(actionsList[spActions.selectedItemPosition]){
             "sbv_max_count" -> {
-                myStepBarView.maxCount= progress
+                myStepBarView.maxCount= progress+2
             }
             "sbv_steps_line_height" -> {
                 myStepBarView.stepsLineHeight = DpHandler.dpToPx(this@MainActivity,progress).toFloat()

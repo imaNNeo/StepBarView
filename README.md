@@ -56,7 +56,6 @@ just add ``StepBarView`` in your java code or xml.
 
 ## View Properties 
 
-### * in XML
 you can customize StepBarView, all of this attributes can change via xml or code (runtime)
 
 

@@ -30,6 +30,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     var maxCount : Int = 0
         set(value) {
+            if(allowTouchStepTo == field)
+                allowTouchStepTo = value
             field = value
             invalidate()
         }

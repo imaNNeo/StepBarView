@@ -5,6 +5,8 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
+import android.os.Parcel
+import android.os.Parcelable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
@@ -311,6 +313,105 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     }
 
+
+    override fun onSaveInstanceState(): Parcelable {
+        val superState = super.onSaveInstanceState()
+        val ss = SavedState(superState)
+        ss.maxCount = maxCount
+        ss.reachedStep = reachedStep
+        ss.stepsReachedColor = stepsReachedColor
+        ss.stepsUnreachedColor = stepsUnreachedColor
+        ss.stepsLineReachedColor = stepsLineReachedColor
+        ss.stepsLineUnreachedColor = stepsLineUnreachedColor
+        ss.stepsLineHeight = stepsLineHeight
+        ss.stepsSize = stepsSize
+        ss.stepsTextColor = stepsTextColor
+        ss.stepsTextSize = stepsTextSize
+        ss.stepsLineMarginLeft = stepsLineMarginLeft
+        ss.stepsLineMarginRight = stepsLineMarginRight
+        ss.allowTouchStepTo = allowTouchStepTo
+        return ss
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        val savedState = state as SavedState
+        super.onRestoreInstanceState(savedState.superState)
+        maxCount = savedState.maxCount
+        reachedStep = savedState.reachedStep
+        stepsReachedColor = savedState.stepsReachedColor
+        stepsUnreachedColor = savedState.stepsUnreachedColor
+        stepsLineReachedColor = savedState.stepsLineReachedColor
+        stepsLineUnreachedColor = savedState.stepsLineUnreachedColor
+        stepsLineHeight = savedState.stepsLineHeight
+        stepsSize = savedState.stepsSize
+        stepsTextColor = savedState.stepsTextColor
+        stepsTextSize = savedState.stepsTextSize
+        stepsLineMarginLeft = savedState.stepsLineMarginLeft
+        stepsLineMarginRight = savedState.stepsLineMarginRight
+        allowTouchStepTo = savedState.allowTouchStepTo
+    }
+
+    class SavedState : BaseSavedState{
+        companion object CREATOR : Parcelable.Creator<SavedState>{
+            override fun createFromParcel(source: Parcel?) = SavedState(source)
+            override fun newArray(size: Int) = arrayOfNulls<SavedState?>(size)
+        }
+
+
+        var maxCount : Int = 1
+        var reachedStep: Int = 1
+        var stepsReachedColor : Int = 1
+        var stepsUnreachedColor : Int = 1
+        var stepsLineReachedColor: Int = 1
+        var stepsLineUnreachedColor: Int = 1
+        var stepsLineHeight: Float = 1f
+        var stepsSize: Float = 1f
+        var stepsTextColor: Int = 1
+        var stepsTextSize : Float = 1f
+        var stepsLineMarginLeft : Float = 1f
+        var stepsLineMarginRight : Float = 1f
+        var allowTouchStepTo : Int = 1
+
+        constructor(parcelable: Parcelable) : super(parcelable)
+        constructor(parcel : Parcel?) : super(parcel){
+            parcel?.let {
+                maxCount = it.readInt()
+                reachedStep = it.readInt()
+                stepsReachedColor = it.readInt()
+                stepsUnreachedColor = it.readInt()
+                stepsLineReachedColor = it.readInt()
+                stepsLineUnreachedColor = it.readInt()
+                stepsLineHeight = it.readFloat()
+                stepsSize = it.readFloat()
+                stepsTextColor = it.readInt()
+                stepsTextSize = it.readFloat()
+                stepsLineMarginLeft = it.readFloat()
+                stepsLineMarginRight = it.readFloat()
+                allowTouchStepTo = it.readInt()
+            }
+
+        }
+
+        override fun writeToParcel(out: Parcel?, flags: Int) {
+            super.writeToParcel(out, flags)
+
+            out?.let {
+                it.writeInt(maxCount)
+                it.writeInt(reachedStep)
+                it.writeInt(stepsReachedColor)
+                it.writeInt(stepsUnreachedColor)
+                it.writeInt(stepsLineReachedColor)
+                it.writeInt(stepsLineUnreachedColor)
+                it.writeFloat(stepsLineHeight)
+                it.writeFloat(stepsSize)
+                it.writeInt(stepsTextColor)
+                it.writeFloat(stepsTextSize)
+                it.writeFloat(stepsLineMarginLeft)
+                it.writeFloat(stepsLineMarginRight)
+                it.writeInt(allowTouchStepTo)
+            }
+        }
+    }
 
     interface OnStepChangeListener{
         fun onStepChanged(currentStep:Int)

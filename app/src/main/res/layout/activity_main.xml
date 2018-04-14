@@ -17,9 +17,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/view_separator"
-        android:paddingTop="0dp"
-        android:paddingBottom="24dp"
         android:background="#0f0"
+        android:padding="16dp"
         />
 
 

@@ -32,6 +32,17 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         get() = Math.max(stepsSize,stepsLineHeight)
 
 
+    //Lines between steps will drawn based on this variable
+    //Note that now width is match_parent
+    private val linesWidth : Float
+        get() {
+            val allStepsSize = (maxCount * stepsSize)
+            val allMarginsSize = ((maxCount-1) * (stepsLineMarginLeft + stepsLineMarginRight))
+            val width = width - paddingLeft - paddingRight
+            val available = (width - allStepsSize - allMarginsSize)
+            return available/(maxCount-1)
+        }
+
     //This property used in drawing stuff
     private val yPos
         get() = ((rawHeiht/2) + paddingTop)
@@ -195,28 +206,24 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     private fun calculateDesireHeight() = rawHeiht + paddingTop + paddingBottom
 
-    private fun getStepsLineSize() : Float {
-        val allStepsSize = (maxCount * stepsSize)
-        val allMarginsSize = ((maxCount-1) * (stepsLineMarginLeft + stepsLineMarginRight))
-        val width = measuredWidth
-        val available = (width - allStepsSize - allMarginsSize)
-        return available/(maxCount-1)
-    }
-
 
     private fun getHorizontalCirclesPosition() : ArrayList<Float> {
         val stepsHorizontalPositions = arrayListOf<Float>()
-        val linesSize = getStepsLineSize()
+        val linesSize = linesWidth
 
-        for(i in 0 until maxCount)
-            stepsHorizontalPositions.add(i,(i * (stepsSize + stepsLineMarginLeft + linesSize + stepsLineMarginRight)) + stepsSize / 2)
+        for(i in 0 until maxCount) {
+            //This offset contains step circle and right line
+            val oneStepOffset = stepsSize + stepsLineMarginLeft + linesSize + stepsLineMarginRight
+            val offsetToDraw = paddingLeft + (i * oneStepOffset)
+            stepsHorizontalPositions.add(i, offsetToDraw + stepsSize / 2)
+        }
 
         return stepsHorizontalPositions
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        val linesSize = getStepsLineSize()
+        val linesSize = linesWidth
 
         for(i in 0 until maxCount) {
             Log.d("SS","drawing $i step")
@@ -241,7 +248,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                         if(i<reachedStep-1) stepsLineReachedColor
                         else stepsLineUnreachedColor
 
-                var startXPoint = ((i*(stepsSize + stepsLineMarginLeft + linesSize + stepsLineMarginRight)) + stepsSize+stepsLineMarginLeft)
+                var startXPoint = xPos + (stepsSize/2) + stepsLineMarginLeft
                 canvas?.drawLine(
                         startXPoint,
                         yPos,
@@ -268,23 +275,14 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         when(event?.action){
-            MotionEvent.ACTION_DOWN -> {
-                handleTouchPost(event.x,event.y)
-            }
-
-            MotionEvent.ACTION_MOVE -> {
-                handleTouchPost(event.x,event.y)
-            }
-
-            MotionEvent.ACTION_UP -> {
-
-            }
+            MotionEvent.ACTION_DOWN,
+            MotionEvent.ACTION_MOVE -> handleTouchPost(event.x,event.y)
         }
         return true
     }
 
     private fun handleTouchPost(x: Float, y: Float) {
-        val lineSize = getStepsLineSize()
+        val lineSize = linesWidth
         for(i in 0 until getHorizontalCirclesPosition().size){
 
             //Disallow touch more than allowTouchStepTo

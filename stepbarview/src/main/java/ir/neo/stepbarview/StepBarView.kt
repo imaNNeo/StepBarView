@@ -129,7 +129,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     init {
         maxCount = 8
-        reachedStep = 3
+        reachedStep = 1
 
         stepsReachedColor = ContextCompat.getColor(context,R.color.sbv_step_reached_color)
         stepsUnreachedColor = ContextCompat.getColor(context,R.color.sbv_step_unreached_color)

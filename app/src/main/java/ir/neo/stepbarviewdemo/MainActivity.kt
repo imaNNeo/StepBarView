@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
         setContentView(R.layout.activity_main)
 
 
-        myStepBarView = findViewById(R.id.my_stepBarView)
+        myStepBarView = findViewById(R.id.my_stepBarView4)
         sbAttrsValue = findViewById(R.id.sb_attrsValue)
         spActions = findViewById(R.id.sp_actions)
         tvValue = findViewById(R.id.tv_value)

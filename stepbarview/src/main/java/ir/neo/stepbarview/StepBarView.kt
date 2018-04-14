@@ -28,6 +28,15 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     var onStepChangeListener : OnStepChangeListener? = null
 
+    private val rawHeiht
+        get() = Math.max(stepsSize,stepsLineHeight)
+
+
+    //This property used in drawing stuff
+    private val yPos
+        get() = ((rawHeiht/2) + paddingTop)
+
+
     var maxCount : Int = 0
         set(value) {
             if(allowTouchStepTo == field)
@@ -184,13 +193,13 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
     }
 
 
-    private fun calculateDesireHeight() = Math.max(stepsSize,stepsLineHeight)
+    private fun calculateDesireHeight() = rawHeiht + paddingTop + paddingBottom
 
     private fun getStepsLineSize() : Float {
         val allStepsSize = (maxCount * stepsSize)
         val allMarginsSize = ((maxCount-1) * (stepsLineMarginLeft + stepsLineMarginRight))
         val width = measuredWidth
-        val available = (width - allStepsSize - allMarginsSize);
+        val available = (width - allStepsSize - allMarginsSize)
         return available/(maxCount-1)
     }
 
@@ -204,43 +213,40 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
         return stepsHorizontalPositions
     }
+
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-
-
-
         val linesSize = getStepsLineSize()
 
         for(i in 0 until maxCount) {
             Log.d("SS","drawing $i step")
 
+
+            val xPos = getHorizontalCirclesPosition()[i]
+
             //Draw Steps Circle
-            if(i<reachedStep){
-                stepsPaint.color = stepsReachedColor
-            }else{
-                stepsPaint.color = stepsUnreachedColor
-            }
+            stepsPaint.color = if(i<reachedStep) stepsReachedColor else stepsUnreachedColor
 
             canvas?.drawCircle(
-                    getHorizontalCirclesPosition()[i].toFloat(),
-                    (height/2).toFloat(),
-                    (stepsSize/2).toFloat(),
+                    xPos,
+                    yPos,
+                    (stepsSize/2),
                     stepsPaint)
 
 
             //Draw Steps Line
             if(i<maxCount-1){
-                stepsLinePaint.strokeWidth = stepsLineHeight.toFloat()
+                stepsLinePaint.strokeWidth = stepsLineHeight
                 stepsLinePaint.color =
                         if(i<reachedStep-1) stepsLineReachedColor
                         else stepsLineUnreachedColor
 
-                var startXPoint = ((i*(stepsSize + stepsLineMarginLeft + linesSize + stepsLineMarginRight)) + stepsSize+stepsLineMarginLeft).toFloat()
+                var startXPoint = ((i*(stepsSize + stepsLineMarginLeft + linesSize + stepsLineMarginRight)) + stepsSize+stepsLineMarginLeft)
                 canvas?.drawLine(
                         startXPoint,
-                        (height/2).toFloat(),
+                        yPos,
                         startXPoint + linesSize,
-                        (height/2).toFloat(),
+                        yPos,
                         stepsLinePaint
                 )
             }
@@ -253,8 +259,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             stepsTextPaint.getTextBounds(drawingText,0,drawingText.length,tmpRect)
             canvas?.drawText(
                     drawingText,
-                    (getHorizontalCirclesPosition()[i]).toFloat(),
-                    ((height/2) + (tmpRect.height()/2)).toFloat(),
+                    xPos,
+                    (yPos + (tmpRect.height()/2)),
                     stepsTextPaint)
         }
 
@@ -285,19 +291,19 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             if(i >= allowTouchStepTo) continue
 
             val xDotPos = getHorizontalCirclesPosition()[i]
-            val yDotPos = height/2
+            val yDotPos = yPos
 
             val stepHalf = stepsSize/2
 
             //verticalExtraSpace is the extra space for vertical touching
-            val verticalExtraSpace = (height*2)
+            val verticalExtraSpace = (rawHeiht*2)
 
             val stepArea = RectF(
                     xDotPos-stepHalf-lineSize-stepsLineMarginRight,
                     yDotPos-stepHalf-verticalExtraSpace,
                     xDotPos+stepHalf+stepsLineMarginLeft,
                     yDotPos+stepHalf+verticalExtraSpace
-                    )
+            )
 
             if(stepArea.contains(x, y)){
                 //Touched Step (i+1)

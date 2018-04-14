@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="ir.neo.stepbarviewdemo.MainActivity"
+    android:background="#fff"
     >
 
 
@@ -16,6 +17,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/view_separator"
+        android:paddingTop="0dp"
+        android:paddingBottom="24dp"
+        android:background="#0f0"
         />
 
 

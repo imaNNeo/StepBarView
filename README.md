@@ -1,7 +1,6 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![APK](https://img.shields.io/badge/APK-Demo-brightgreen.svg)](https://github.com/imaNNeoFighT/StepBarView/raw/master/repo_files/SbvDemo1-0-0.apk)
-[![](https://jitpack.io/v/imaNNeoFighT/ArcChartView.svg)](https://jitpack.io/#imaNNeoFighT/ArcChartView)
-[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-ArcChartView-green.svg?style=flat )]( https://android-arsenal.com/details/1/6599 )
+[![](https://jitpack.io/v/imaNNeoFighT/StepBarView.svg)](https://jitpack.io/#imaNNeoFighT/StepBarView)
 
 # Step Bar View
 
@@ -41,9 +40,9 @@ Add the dependency to your app build.gradle file
 ```
 dependencies
 {
-    compile 'com.github.imaNNeoFighT:ArcChartView:1.0.1'
+    compile 'com.github.imaNNeoFighT:StepBarView:1.0.2'
     // Or in new versions : 
-    // implementation 'com.github.imaNNeoFighT:ArcChartView:1.0.1'
+    // implementation 'com.github.imaNNeoFighT:StepBarView:1.0.2'
 }
 ```
 

@@ -52,7 +52,6 @@ captures/
 .idea/dictionaries
 .idea/libraries
 .idea
-gradle/
 gradlew
 gradlew.bat
 

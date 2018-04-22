@@ -29,6 +29,7 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         app:sbv_show_step_stroke="true"
+        app:sbv_is_rtl="true"
         />
 
     <ir.neo.stepbarview.StepBarView

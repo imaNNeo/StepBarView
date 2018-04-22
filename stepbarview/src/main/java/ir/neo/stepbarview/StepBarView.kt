@@ -12,7 +12,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import java.util.*
 
 /**
  * Created by iman.
@@ -164,6 +163,13 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
+    var isRtl : Boolean = false
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+
     init {
         maxCount = 8
         reachedStep = 1
@@ -194,6 +200,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         stepsStrokeCurrentColor = ContextCompat.getColor(context,R.color.sbv_step_stroke_current_color)
 
         showStepStroke = false
+
+        isRtl = false
 
         attrs.let {
             val a = mContext.obtainStyledAttributes(attrs, R.styleable.StepBarView)
@@ -226,6 +234,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             stepsStrokeCurrentColor = a.getColor(R.styleable.StepBarView_sbv_steps_stroke_current_color,stepsStrokeCurrentColor)
 
             showStepStroke = a.getBoolean(R.styleable.StepBarView_sbv_show_step_stroke, showStepStroke)
+
+            isRtl = a.getBoolean(R.styleable.StepBarView_sbv_is_rtl, isRtl)
 
             a.recycle()
         }
@@ -270,15 +280,22 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
     private fun calculateDesireHeight() = rawHeiht + paddingTop + paddingBottom
 
 
-    private fun getHorizontalCirclesPosition() : ArrayList<Float> {
-        val stepsHorizontalPositions = arrayListOf<Float>()
+    private fun getHorizontalCirclesPosition() : FloatArray {
+        val stepsHorizontalPositions = FloatArray(maxCount)
         val linesSize = linesWidth
 
-        for(i in 0 until maxCount) {
+
+        val range = when(isRtl) {
+            true -> maxCount-1 downTo 0
+            false -> 0 until maxCount
+        }
+        for(i in range) {
             //This offset contains step circle and right line
             val oneStepOffset = stepsSize + stepsLineMarginLeft + linesSize + stepsLineMarginRight
             val offsetToDraw = paddingLeft + (i * oneStepOffset)
-            stepsHorizontalPositions.add(i, offsetToDraw + stepsSize / 2)
+
+            val pos = if(isRtl) (maxCount-1)-i else i
+            stepsHorizontalPositions[pos] = offsetToDraw + stepsSize / 2
         }
 
         return stepsHorizontalPositions
@@ -324,16 +341,26 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                         if(i<reachedStep-1) stepsLineReachedColor
                         else stepsLineUnreachedColor
 
-                var startXPoint = xPos + (stepsSize/2) + stepsLineMarginLeft
+                val startXPoint =
+                        when(isRtl){
+                            true -> xPos - (stepsSize/2) - stepsLineMarginRight
+                            false -> xPos + (stepsSize/2) + stepsLineMarginLeft
+                        }
+
+                val endXPoint =
+                        when(isRtl){
+                            false -> startXPoint + linesSize
+                            true -> startXPoint - linesSize
+                        }
+
                 canvas?.drawLine(
                         startXPoint,
                         yPos,
-                        startXPoint + linesSize,
+                        endXPoint,
                         yPos,
                         stepsLinePaint
                 )
             }
-
 
             //Draw Steps Index
             if(showStepIndex) {
@@ -374,10 +401,22 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             //verticalExtraSpace is the extra space for vertical touching
             val verticalExtraSpace = (rawHeiht*2)
 
+            val leftArea =
+                    when(isRtl){
+                        false -> xDotPos-stepHalf-lineSize-stepsLineMarginRight
+                        true -> xDotPos-stepHalf-stepsLineMarginRight
+                    }
+
+            val rightArea =
+                    when(isRtl){
+                        false -> xDotPos+stepHalf+stepsLineMarginLeft
+                        true -> xDotPos+stepHalf+stepsLineMarginLeft+lineSize
+                    }
+
             val stepArea = RectF(
-                    xDotPos-stepHalf-lineSize-stepsLineMarginRight,
+                    leftArea,
                     yDotPos-stepHalf-verticalExtraSpace,
-                    xDotPos+stepHalf+stepsLineMarginLeft,
+                    rightArea,
                     yDotPos+stepHalf+verticalExtraSpace
             )
 
@@ -412,6 +451,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         ss.stepsStrokeUnReachedColor = stepsStrokeUnReachedColor
         ss.stepsStrokeCurrentColor = stepsStrokeCurrentColor
         ss.showStepStroke = showStepStroke
+        ss.isRtl = isRtl
         return ss
     }
 
@@ -437,6 +477,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         stepsStrokeUnReachedColor = savedState.stepsStrokeUnReachedColor
         stepsStrokeCurrentColor = savedState.stepsStrokeCurrentColor
         showStepStroke = savedState.showStepStroke
+        isRtl = savedState.isRtl
     }
 
     class SavedState : BaseSavedState{
@@ -464,7 +505,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         var stepsStrokeReachedColor : Int = 1
         var stepsStrokeUnReachedColor : Int = 1
         var stepsStrokeCurrentColor : Int = 1
-        var showStepStroke: Boolean = false
+        var showStepStroke : Boolean = false
+        var isRtl : Boolean = false
 
         constructor(parcelable: Parcelable) : super(parcelable)
         constructor(parcel : Parcel?) : super(parcel){
@@ -488,6 +530,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                 stepsStrokeUnReachedColor = it.readInt()
                 stepsStrokeCurrentColor = it.readInt()
                 showStepStroke = it.readInt()==1
+                isRtl = it.readInt()==1
             }
 
         }
@@ -515,6 +558,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                 it.writeInt(stepsStrokeUnReachedColor)
                 it.writeInt(stepsStrokeCurrentColor)
                 it.writeInt(if(showStepStroke) 1 else 0)
+                it.writeInt(if(isRtl) 1 else 0)
             }
         }
     }

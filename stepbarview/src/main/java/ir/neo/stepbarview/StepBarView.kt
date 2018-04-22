@@ -175,7 +175,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
             allowTouchStepTo = a.getInt(R.styleable.StepBarView_sbv_allow_touch_step_to,maxCount)
 
-            showStepIndex = a.getBoolean(R.styleable.StepBarView_sbv_draw_step_index, showStepIndex)
+            showStepIndex = a.getBoolean(R.styleable.StepBarView_sbv_show_step_index, showStepIndex)
 
             a.recycle()
         }

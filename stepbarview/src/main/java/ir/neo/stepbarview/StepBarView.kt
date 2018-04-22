@@ -127,7 +127,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     var allowTouchStepTo : Int = 0
 
-    var drawStepIndex : Boolean = true
+    var showStepIndex: Boolean = true
 
 
     init {
@@ -151,7 +151,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
         allowTouchStepTo = maxCount
 
-        drawStepIndex = true
+        showStepIndex = true
 
         attrs.let {
             val a = mContext.obtainStyledAttributes(attrs, R.styleable.StepBarView)
@@ -175,7 +175,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
             allowTouchStepTo = a.getInt(R.styleable.StepBarView_sbv_allow_touch_step_to,maxCount)
 
-            drawStepIndex = a.getBoolean(R.styleable.StepBarView_sbv_draw_step_index,drawStepIndex)
+            showStepIndex = a.getBoolean(R.styleable.StepBarView_sbv_draw_step_index, showStepIndex)
 
             a.recycle()
         }
@@ -269,7 +269,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
 
             //Draw Steps Index
-            if(drawStepIndex) {
+            if(showStepIndex) {
                 stepsTextPaint.color = stepsTextColor
                 stepsTextPaint.textSize = stepsTextSize
                 val drawingText = (i + 1).toString()
@@ -339,7 +339,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         ss.stepsLineMarginLeft = stepsLineMarginLeft
         ss.stepsLineMarginRight = stepsLineMarginRight
         ss.allowTouchStepTo = allowTouchStepTo
-        ss.drawStepIndex = drawStepIndex
+        ss.showStepIndex = showStepIndex
         return ss
     }
 
@@ -359,7 +359,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         stepsLineMarginLeft = savedState.stepsLineMarginLeft
         stepsLineMarginRight = savedState.stepsLineMarginRight
         allowTouchStepTo = savedState.allowTouchStepTo
-        drawStepIndex = savedState.drawStepIndex
+        showStepIndex = savedState.showStepIndex
     }
 
     class SavedState : BaseSavedState{
@@ -382,7 +382,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         var stepsLineMarginLeft : Float = 1f
         var stepsLineMarginRight : Float = 1f
         var allowTouchStepTo : Int = 1
-        var drawStepIndex : Boolean = true
+        var showStepIndex: Boolean = true
 
         constructor(parcelable: Parcelable) : super(parcelable)
         constructor(parcel : Parcel?) : super(parcel){
@@ -400,7 +400,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                 stepsLineMarginLeft = it.readFloat()
                 stepsLineMarginRight = it.readFloat()
                 allowTouchStepTo = it.readInt()
-                drawStepIndex = it.readInt()==1
+                showStepIndex = it.readInt()==1
             }
 
         }
@@ -422,7 +422,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                 it.writeFloat(stepsLineMarginLeft)
                 it.writeFloat(stepsLineMarginRight)
                 it.writeInt(allowTouchStepTo)
-                it.writeInt(if(drawStepIndex) 1 else 0)
+                it.writeInt(if(showStepIndex) 1 else 0)
             }
         }
     }

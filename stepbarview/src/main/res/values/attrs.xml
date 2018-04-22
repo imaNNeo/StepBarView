@@ -14,7 +14,7 @@
         <attr name="sbv_steps_line_margin_left" format="dimension"/>
         <attr name="sbv_steps_line_margin_right" format="dimension"/>
         <attr name="sbv_allow_touch_step_to" format="integer"/>
-        <attr name="sbv_draw_step_index" format="boolean"/>
+        <attr name="sbv_show_step_index" format="boolean"/>
     </declare-styleable>
 
 </resources>

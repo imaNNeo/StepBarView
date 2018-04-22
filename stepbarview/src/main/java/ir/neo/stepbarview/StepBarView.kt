@@ -23,6 +23,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         View(mContext,attrs, defStyleAttr) {
 
     private var stepsPaint : Paint
+    private var stepsStrokePaint : Paint
     private var stepsLinePaint : Paint
     private var stepsTextPaint : Paint
 
@@ -128,7 +129,40 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
     var allowTouchStepTo : Int = 0
 
     var showStepIndex: Boolean = true
+        set(value) {
+            field = value
+            invalidate()
+        }
 
+    var stepsStrokeSize : Float = 0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var stepsStrokeReachedColor : Int = 0
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var stepsStrokeUnReachedColor : Int = 0
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var stepsStrokeCurrentColor : Int = 0
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var showStepStroke : Boolean = true
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     init {
         maxCount = 8
@@ -152,6 +186,14 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         allowTouchStepTo = maxCount
 
         showStepIndex = true
+
+        stepsStrokeSize = DpHandler.dpToPx(context,2).toFloat()
+
+        stepsStrokeReachedColor = ContextCompat.getColor(context,R.color.sbv_step_stroke_reached_color)
+        stepsStrokeUnReachedColor = ContextCompat.getColor(context,R.color.sbv_step_stroke_unreached_color)
+        stepsStrokeCurrentColor = ContextCompat.getColor(context,R.color.sbv_step_stroke_current_color)
+
+        showStepStroke = false
 
         attrs.let {
             val a = mContext.obtainStyledAttributes(attrs, R.styleable.StepBarView)
@@ -177,11 +219,23 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
             showStepIndex = a.getBoolean(R.styleable.StepBarView_sbv_show_step_index, showStepIndex)
 
+            stepsStrokeSize = a.getDimension(R.styleable.StepBarView_sbv_steps_stroke_size,stepsStrokeSize)
+
+            stepsStrokeReachedColor = a.getColor(R.styleable.StepBarView_sbv_steps_stroke_reached_color,stepsStrokeReachedColor)
+            stepsStrokeUnReachedColor = a.getColor(R.styleable.StepBarView_sbv_steps_stroke_unreached_color,stepsStrokeUnReachedColor)
+            stepsStrokeCurrentColor = a.getColor(R.styleable.StepBarView_sbv_steps_stroke_current_color,stepsStrokeCurrentColor)
+
+            showStepStroke = a.getBoolean(R.styleable.StepBarView_sbv_show_step_stroke, showStepStroke)
+
             a.recycle()
         }
 
         stepsPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.FILL
+        }
+
+        stepsStrokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            style = Paint.Style.STROKE
         }
 
         stepsLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -242,13 +296,26 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
             //Draw Steps Circle
             stepsPaint.color = if(i<reachedStep) stepsReachedColor else stepsUnreachedColor
-
             canvas?.drawCircle(
                     xPos,
                     yPos,
                     (stepsSize/2),
                     stepsPaint)
 
+            //Draw Step Stroke
+            if(showStepStroke) {
+                stepsStrokePaint.strokeWidth = stepsStrokeSize
+                stepsStrokePaint.color = when {
+                    i + 1 < reachedStep -> stepsStrokeReachedColor
+                    i + 1 == reachedStep -> stepsStrokeCurrentColor
+                    else -> stepsStrokeUnReachedColor
+                }
+                canvas?.drawCircle(
+                        xPos,
+                        yPos,
+                        (stepsSize / 2) - (stepsStrokePaint.strokeWidth / 2),
+                        stepsStrokePaint)
+            }
 
             //Draw Steps Line
             if(i<maxCount-1){
@@ -340,6 +407,11 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         ss.stepsLineMarginRight = stepsLineMarginRight
         ss.allowTouchStepTo = allowTouchStepTo
         ss.showStepIndex = showStepIndex
+        ss.stepsStrokeSize = stepsStrokeSize
+        ss.stepsStrokeReachedColor = stepsStrokeReachedColor
+        ss.stepsStrokeUnReachedColor = stepsStrokeUnReachedColor
+        ss.stepsStrokeCurrentColor = stepsStrokeCurrentColor
+        ss.showStepStroke = showStepStroke
         return ss
     }
 
@@ -360,6 +432,11 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         stepsLineMarginRight = savedState.stepsLineMarginRight
         allowTouchStepTo = savedState.allowTouchStepTo
         showStepIndex = savedState.showStepIndex
+        stepsStrokeSize = savedState.stepsStrokeSize
+        stepsStrokeReachedColor = savedState.stepsStrokeReachedColor
+        stepsStrokeUnReachedColor = savedState.stepsStrokeUnReachedColor
+        stepsStrokeCurrentColor = savedState.stepsStrokeCurrentColor
+        showStepStroke = savedState.showStepStroke
     }
 
     class SavedState : BaseSavedState{
@@ -383,6 +460,11 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         var stepsLineMarginRight : Float = 1f
         var allowTouchStepTo : Int = 1
         var showStepIndex: Boolean = true
+        var stepsStrokeSize : Float = 1f
+        var stepsStrokeReachedColor : Int = 1
+        var stepsStrokeUnReachedColor : Int = 1
+        var stepsStrokeCurrentColor : Int = 1
+        var showStepStroke: Boolean = false
 
         constructor(parcelable: Parcelable) : super(parcelable)
         constructor(parcel : Parcel?) : super(parcel){
@@ -401,6 +483,11 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                 stepsLineMarginRight = it.readFloat()
                 allowTouchStepTo = it.readInt()
                 showStepIndex = it.readInt()==1
+                stepsStrokeSize = it.readFloat()
+                stepsStrokeReachedColor = it.readInt()
+                stepsStrokeUnReachedColor = it.readInt()
+                stepsStrokeCurrentColor = it.readInt()
+                showStepStroke = it.readInt()==1
             }
 
         }
@@ -423,6 +510,11 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                 it.writeFloat(stepsLineMarginRight)
                 it.writeInt(allowTouchStepTo)
                 it.writeInt(if(showStepIndex) 1 else 0)
+                it.writeFloat(stepsStrokeSize)
+                it.writeInt(stepsStrokeReachedColor)
+                it.writeInt(stepsStrokeUnReachedColor)
+                it.writeInt(stepsStrokeCurrentColor)
+                it.writeInt(if(showStepStroke) 1 else 0)
             }
         }
     }

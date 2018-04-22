@@ -28,6 +28,7 @@
         app:sbv_max_count="6"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
+        app:sbv_show_step_stroke="true"
         />
 
     <ir.neo.stepbarview.StepBarView

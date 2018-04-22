@@ -6,5 +6,8 @@
     <color name="sbv_step_line_reached_color">@color/sbv_step_reached_color</color>
     <color name="sbv_step_line_unreached_color">@color/sbv_step_unreached_color</color>
     <color name="sbv_step_text_color">#fff</color>
+    <color name="sbv_step_stroke_reached_color">#f00</color>
+    <color name="sbv_step_stroke_unreached_color">#0f0</color>
+    <color name="sbv_step_stroke_current_color">#00f</color>
 
 </resources>

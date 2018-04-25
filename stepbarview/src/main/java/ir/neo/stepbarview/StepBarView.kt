@@ -170,6 +170,10 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         }
 
 
+    var allowSelectStep = object : AllowSelectStep{
+        override fun allowSelectStep(step: Int) = true
+    }
+
     init {
         maxCount = 8
         reachedStep = 1
@@ -393,6 +397,9 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             //Disallow touch more than allowTouchStepTo
             if(i >= allowTouchStepTo) continue
 
+            //Disallow touch user prevent steps
+            if(!allowSelectStep.allowSelectStep(i+1)) continue
+
             val xDotPos = getHorizontalCirclesPosition()[i]
             val yDotPos = yPos
 
@@ -565,6 +572,10 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     interface OnStepChangeListener{
         fun onStepChanged(currentStep:Int)
+    }
+
+    interface AllowSelectStep{
+        fun allowSelectStep(step: Int) : Boolean
     }
 
 }

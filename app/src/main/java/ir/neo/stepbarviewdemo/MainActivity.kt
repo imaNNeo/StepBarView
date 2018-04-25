@@ -21,6 +21,10 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
 
 
         myStepBarView = findViewById(R.id.my_stepBarView4)
+        myStepBarView.allowSelectStep = object : StepBarView.AllowSelectStep{
+            override fun allowSelectStep(step: Int) = step != 2
+        }
+
         sbAttrsValue = findViewById(R.id.sb_attrsValue)
         spActions = findViewById(R.id.sp_actions)
         tvValue = findViewById(R.id.tv_value)

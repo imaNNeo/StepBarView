@@ -315,29 +315,6 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
             val xPos = getHorizontalCirclesPosition()[i]
 
-            //Draw Steps Circle
-            stepsPaint.color = if(i<reachedStep) stepsReachedColor else stepsUnreachedColor
-            canvas?.drawCircle(
-                    xPos,
-                    yPos,
-                    (stepsSize/2),
-                    stepsPaint)
-
-            //Draw Step Stroke
-            if(showStepStroke) {
-                stepsStrokePaint.strokeWidth = stepsStrokeSize
-                stepsStrokePaint.color = when {
-                    i + 1 < reachedStep -> stepsStrokeReachedColor
-                    i + 1 == reachedStep -> stepsStrokeCurrentColor
-                    else -> stepsStrokeUnReachedColor
-                }
-                canvas?.drawCircle(
-                        xPos,
-                        yPos,
-                        (stepsSize / 2) - (stepsStrokePaint.strokeWidth / 2),
-                        stepsStrokePaint)
-            }
-
             //Draw Steps Line
             if(i<maxCount-1){
                 stepsLinePaint.strokeWidth = stepsLineHeight
@@ -365,6 +342,30 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                         stepsLinePaint
                 )
             }
+
+            //Draw Steps Circle
+            stepsPaint.color = if(i<reachedStep) stepsReachedColor else stepsUnreachedColor
+            canvas?.drawCircle(
+                    xPos,
+                    yPos,
+                    (stepsSize/2),
+                    stepsPaint)
+
+            //Draw Step Stroke
+            if(showStepStroke) {
+                stepsStrokePaint.strokeWidth = stepsStrokeSize
+                stepsStrokePaint.color = when {
+                    i + 1 < reachedStep -> stepsStrokeReachedColor
+                    i + 1 == reachedStep -> stepsStrokeCurrentColor
+                    else -> stepsStrokeUnReachedColor
+                }
+                canvas?.drawCircle(
+                        xPos,
+                        yPos,
+                        (stepsSize / 2) - (stepsStrokePaint.strokeWidth / 2),
+                        stepsStrokePaint)
+            }
+
 
             //Draw Steps Index
             if(showStepIndex) {

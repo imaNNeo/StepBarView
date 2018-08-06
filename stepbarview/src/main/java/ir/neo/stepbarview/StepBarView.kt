@@ -21,6 +21,10 @@ class StepBarView @JvmOverloads
 constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
         View(mContext,attrs, defStyleAttr) {
 
+    companion object {
+        private val IS_DEBUG = false
+    }
+
     private var stepsPaint : Paint
     private var stepsStrokePaint : Paint
     private var stepsLinePaint : Paint
@@ -310,8 +314,9 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         val linesSize = linesWidth
 
         for(i in 0 until maxCount) {
-            Log.d("SS","drawing $i step")
-
+            if (IS_DEBUG) {
+                Log.d("SS", "drawing $i step")
+            }
 
             val xPos = getHorizontalCirclesPosition()[i]
 

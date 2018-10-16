@@ -23,6 +23,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     companion object {
         private val IS_DEBUG = false
+
+        // This is a fixed distance to add space between the circle and the step name
         private val NAME_STEP_SEPARATION_PX = 10
     }
 
@@ -180,6 +182,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
+    //To include the steps name height when onMeasure is called
+    //if showStepName is false, this is 0
     private var namesHeight = 0
 
     var allowSelectStep = object : AllowSelectStep{
@@ -188,6 +192,13 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     private lateinit var stepsNames: Array<String?>
 
+    /**
+     * To add the name of the steps under the circle step.
+     * This must be called from the app implementing this library
+     *
+     * @param step The step number to set the name
+     * @param name The name of the step
+     */
     fun setStepName(step: Int, name: String) {
         if (this::stepsNames.isInitialized) {
             if(step <= maxCount) {
@@ -291,6 +302,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             textAlign = Paint.Align.CENTER
         }
 
+        //If showStepName is true we get the text height with a sample text
+        //to be considered when onMeasure() is called
         if (showStepName) {
             stepsTextPaint.color = stepsTextColor
             stepsTextPaint.textSize = stepsTextSize

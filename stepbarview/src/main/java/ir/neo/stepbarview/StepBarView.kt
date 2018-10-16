@@ -23,6 +23,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     companion object {
         private val IS_DEBUG = false
+        private val NAME_STEP_SEPARATION_PX = 10
     }
 
     private var stepsPaint : Paint
@@ -137,6 +138,12 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
+    var showStepName: Boolean = true
+        set(value) {
+            field = value
+            invalidate()
+        }
+
     var stepsStrokeSize : Float = 0f
         set(value) {
             field = value
@@ -173,9 +180,22 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
+    private var namesHeight = 0
 
     var allowSelectStep = object : AllowSelectStep{
         override fun allowSelectStep(step: Int) = true
+    }
+
+    private lateinit var stepsNames: Array<String?>
+
+    fun setStepName(step: Int, name: String) {
+        if (this::stepsNames.isInitialized) {
+            if(step <= maxCount) {
+                stepsNames[step] = name
+            } else {
+                Log.e("SBV", "setting stepname greater than maxcount")
+            }
+        }
     }
 
     init {
@@ -200,6 +220,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         allowTouchStepTo = maxCount
 
         showStepIndex = true
+        showStepName = true
 
         stepsStrokeSize = DpHandler.dpToPx(context,2).toFloat()
 
@@ -235,6 +256,11 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
             showStepIndex = a.getBoolean(R.styleable.StepBarView_sbv_show_step_index, showStepIndex)
 
+            showStepName = a.getBoolean(R.styleable.StepBarView_sbv_show_step_name, showStepName)
+            if (showStepName) {
+                stepsNames = arrayOfNulls<String>(maxCount)
+            }
+
             stepsStrokeSize = a.getDimension(R.styleable.StepBarView_sbv_steps_stroke_size,stepsStrokeSize)
 
             stepsStrokeReachedColor = a.getColor(R.styleable.StepBarView_sbv_steps_stroke_reached_color,stepsStrokeReachedColor)
@@ -264,6 +290,13 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             style = Paint.Style.FILL
             textAlign = Paint.Align.CENTER
         }
+
+        if (showStepName) {
+            stepsTextPaint.color = stepsTextColor
+            stepsTextPaint.textSize = stepsTextSize
+            stepsTextPaint.getTextBounds("sample", 0, "sample".length, tmpRect)
+            namesHeight = tmpRect.height() + NAME_STEP_SEPARATION_PX * 2
+        }
     }
 
 
@@ -285,8 +318,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
     }
 
 
-    private fun calculateDesireHeight() = rawHeiht + paddingTop + paddingBottom
-
+    private fun calculateDesireHeight() = rawHeiht + paddingTop + paddingBottom + namesHeight
 
     private fun getHorizontalCirclesPosition() : FloatArray {
         val stepsHorizontalPositions = FloatArray(maxCount)
@@ -383,6 +415,19 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                         xPos,
                         (yPos + (tmpRect.height() / 2)),
                         stepsTextPaint)
+            }
+
+            //Draw Steps Names
+            if(showStepName) {
+                stepsNames[i]?.let { name ->
+                    stepsTextPaint.getTextBounds(name, 0, name.length, tmpRect)
+                    canvas?.drawText(
+                        name,
+                        xPos,
+                        yPos*2 + tmpRect.height() + NAME_STEP_SEPARATION_PX,
+                        stepsTextPaint)
+                    namesHeight = tmpRect.height()
+                }
             }
         }
 

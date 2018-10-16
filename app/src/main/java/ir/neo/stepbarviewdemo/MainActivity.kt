@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.*
 import ir.neo.stepbarview.DpHandler
 import ir.neo.stepbarview.StepBarView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
     lateinit var myStepBarView : StepBarView
@@ -31,6 +32,13 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
 
 
         initSpinner()
+        initStepNames()
+    }
+
+    private fun initStepNames() {
+        my_stepBarView5.setStepName(0, "step1")
+        my_stepBarView5.setStepName(2, "step3")
+        my_stepBarView5.setStepName(4, "step5")
     }
 
     private fun initSpinner() {

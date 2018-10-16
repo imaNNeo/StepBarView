@@ -220,7 +220,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         allowTouchStepTo = maxCount
 
         showStepIndex = true
-        showStepName = true
+        showStepName = false
 
         stepsStrokeSize = DpHandler.dpToPx(context,2).toFloat()
 

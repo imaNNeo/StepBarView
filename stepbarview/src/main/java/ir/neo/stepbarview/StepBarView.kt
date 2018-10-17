@@ -190,23 +190,10 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         override fun allowSelectStep(step: Int) = true
     }
 
-    private lateinit var stepsNames: Array<String?>
+    var stepsTitleSetter = object : StepsTitleSetter {
 
-    /**
-     * To add the name of the steps under the circle step.
-     * This must be called from the app implementing this library
-     *
-     * @param step The step number to set the name
-     * @param name The name of the step
-     */
-    fun setStepName(step: Int, name: String) {
-        if (this::stepsNames.isInitialized) {
-            if(step <= maxCount) {
-                stepsNames[step] = name
-            } else {
-                Log.e("SBV", "setting stepname greater than maxcount")
-            }
-        }
+        override fun getStepTitle(step: Int) = "Step ${step + 1}"
+
     }
 
     init {
@@ -268,9 +255,6 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             showStepIndex = a.getBoolean(R.styleable.StepBarView_sbv_show_step_index, showStepIndex)
 
             showStepName = a.getBoolean(R.styleable.StepBarView_sbv_show_step_name, showStepName)
-            if (showStepName) {
-                stepsNames = arrayOfNulls<String>(maxCount)
-            }
 
             stepsStrokeSize = a.getDimension(R.styleable.StepBarView_sbv_steps_stroke_size,stepsStrokeSize)
 
@@ -432,15 +416,14 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
             //Draw Steps Names
             if(showStepName) {
-                stepsNames[i]?.let { name ->
-                    stepsTextPaint.getTextBounds(name, 0, name.length, tmpRect)
-                    canvas?.drawText(
-                        name,
-                        xPos,
-                        yPos*2 + tmpRect.height() + NAME_STEP_SEPARATION_PX,
-                        stepsTextPaint)
-                    namesHeight = tmpRect.height()
-                }
+                val name = stepsTitleSetter.getStepTitle(i + 1);
+                stepsTextPaint.getTextBounds(name, 0, name.length, tmpRect)
+                canvas?.drawText(
+                    name,
+                    xPos,
+                    yPos*2 + tmpRect.height() + NAME_STEP_SEPARATION_PX,
+                    stepsTextPaint)
+                namesHeight = tmpRect.height()
             }
         }
 
@@ -642,4 +625,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         fun allowSelectStep(step: Int) : Boolean
     }
 
+    interface StepsTitleSetter{
+        fun getStepTitle(step: Int) : String
+    }
 }

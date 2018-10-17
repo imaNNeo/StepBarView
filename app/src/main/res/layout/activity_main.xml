@@ -30,6 +30,7 @@
         android:paddingRight="24dp"
         app:sbv_show_step_stroke="true"
         app:sbv_is_rtl="true"
+        app:sbv_show_step_name="true"
         />
 
     <ir.neo.stepbarview.StepBarView
@@ -84,28 +85,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/my_stepBarView3"
-        app:layout_constraintBottom_toTopOf="@+id/my_stepBarView5"
+        app:layout_constraintBottom_toTopOf="@+id/view_separator"
         android:padding="16dp"
         />
 
-    <ir.neo.stepbarview.StepBarView
-            android:id="@+id/my_stepBarView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_stepBarView4"
-            app:layout_constraintBottom_toTopOf="@+id/view_separator"
-            app:sbv_steps_text_color="#000"
-            app:sbv_max_count="5"
-            app:sbv_steps_text_size="16sp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            app:sbv_show_step_stroke="false"
-            app:sbv_show_step_index="false"
-            app:sbv_show_step_name="true"
-    />
 
     <SeekBar
         android:id="@+id/sb_attrsValue"

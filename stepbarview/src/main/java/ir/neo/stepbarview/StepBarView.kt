@@ -182,9 +182,6 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
-    //To include the steps name height when onMeasure is called
-    //if showStepName is false, this is 0
-    private var namesHeight = 0
 
     var allowSelectStep = object : AllowSelectStep{
         override fun allowSelectStep(step: Int) = true
@@ -291,8 +288,6 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         if (showStepName) {
             stepsTextPaint.color = stepsTextColor
             stepsTextPaint.textSize = stepsTextSize
-            stepsTextPaint.getTextBounds("sample", 0, "sample".length, tmpRect)
-            namesHeight = tmpRect.height() + NAME_STEP_SEPARATION_PX * 2
         }
     }
 
@@ -315,8 +310,16 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
     }
 
 
-    private fun calculateDesireHeight() = rawHeiht + paddingTop + paddingBottom + namesHeight
+    private fun calculateDesireHeight() = rawHeiht + paddingTop + paddingBottom + titleTextHeight()
 
+    //To include the steps name height when onMeasure is called
+    //if showStepName is false, this is 0
+    private fun titleTextHeight() : Int {
+        if (!showStepName) return 0
+
+        stepsTextPaint.getTextBounds("sample", 0, "sample".length, tmpRect)
+        return tmpRect.height() + NAME_STEP_SEPARATION_PX * 2
+    }
     private fun getHorizontalCirclesPosition() : FloatArray {
         val stepsHorizontalPositions = FloatArray(maxCount)
         val linesSize = linesWidth
@@ -423,7 +426,6 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                     xPos,
                     yPos*2 + tmpRect.height() + NAME_STEP_SEPARATION_PX,
                     stepsTextPaint)
-                namesHeight = tmpRect.height()
             }
         }
 

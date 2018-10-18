@@ -6,10 +6,10 @@ import android.view.View
 import android.widget.*
 import ir.neo.stepbarview.DpHandler
 import ir.neo.stepbarview.StepBarView
+import ir.neo.stepbarview.StepBarView.StepsTitleSetter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
-    lateinit var myStepBarView : StepBarView
     lateinit var sbAttrsValue: SeekBar
     lateinit var spActions : Spinner
     lateinit var tvValue : TextView
@@ -21,8 +21,7 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
         setContentView(R.layout.activity_main)
 
 
-        myStepBarView = findViewById(R.id.my_stepBarView4)
-        myStepBarView.allowSelectStep = object : StepBarView.AllowSelectStep{
+        my_stepBarView4.allowSelectStep = object : StepBarView.AllowSelectStep{
             override fun allowSelectStep(step: Int) = step != 2
         }
 
@@ -36,9 +35,23 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
     }
 
     private fun initStepNames() {
-        my_stepBarView5.setStepName(0, "step1")
-        my_stepBarView5.setStepName(2, "step3")
-        my_stepBarView5.setStepName(4, "step5")
+        my_stepBarView1.stepsTitleSetter = object : StepsTitleSetter {
+            override fun getStepTitle(step: Int): String {
+                return when (step) {
+                    1 -> "Fist"
+                    2 -> "Second"
+                    3 -> "Third"
+                    4 -> "Fourth"
+                    5 -> "Fifth"
+                    6 -> "Sixth"
+                    7 -> "Seventh"
+                    8 -> "Eighth"
+                    9 -> "Ninth"
+                    10 -> "Tenth"
+                    else -> "Non"
+                }
+            }
+        }
     }
 
     private fun initSpinner() {
@@ -67,7 +80,7 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
         }
 
         spActions.setSelection(0)
-        refreshValueText(myStepBarView.maxCount)
+        refreshValueText(my_stepBarView4.maxCount)
     }
 
 
@@ -76,37 +89,37 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
         when(actionsList[position]){
             "sbv_max_count" -> {
                 sbAttrsValue.max = 20
-                sbAttrsValue.progress = myStepBarView.maxCount-2
+                sbAttrsValue.progress = my_stepBarView4.maxCount-2
                 refreshValueText(sbAttrsValue.progress)
             }
             "sbv_steps_line_height" -> {
                 sbAttrsValue.max = 20
-                sbAttrsValue.progress = DpHandler.pxToDp(this@MainActivity, myStepBarView.stepsLineHeight.toInt())
+                sbAttrsValue.progress = DpHandler.pxToDp(this@MainActivity, my_stepBarView4.stepsLineHeight.toInt())
                 refreshValueText(sbAttrsValue.progress)
             }
             "sbv_steps_size" -> {
                 sbAttrsValue.max = 80
-                sbAttrsValue.progress = DpHandler.pxToDp(this@MainActivity, myStepBarView.stepsSize.toInt())
+                sbAttrsValue.progress = DpHandler.pxToDp(this@MainActivity, my_stepBarView4.stepsSize.toInt())
                 refreshValueText(sbAttrsValue.progress)
             }
             "sbv_steps_text_size" -> {
                 sbAttrsValue.max = 25
-                sbAttrsValue.progress = DpHandler.pxToSp(this@MainActivity, myStepBarView.stepsSize.toInt()).toInt()
+                sbAttrsValue.progress = DpHandler.pxToSp(this@MainActivity, my_stepBarView4.stepsSize.toInt()).toInt()
                 refreshValueText(sbAttrsValue.progress)
             }
             "sbv_steps_line_margin_left" -> {
                 sbAttrsValue.max = 40
-                sbAttrsValue.progress = DpHandler.pxToDp(this@MainActivity, myStepBarView.stepsLineMarginLeft.toInt())
+                sbAttrsValue.progress = DpHandler.pxToDp(this@MainActivity, my_stepBarView4.stepsLineMarginLeft.toInt())
                 refreshValueText(sbAttrsValue.progress)
             }
             "sbv_steps_line_margin_right" -> {
                 sbAttrsValue.max = 100
-                sbAttrsValue.progress = DpHandler.pxToDp(this@MainActivity, myStepBarView.stepsLineMarginRight.toInt())
+                sbAttrsValue.progress = DpHandler.pxToDp(this@MainActivity, my_stepBarView4.stepsLineMarginRight.toInt())
                 refreshValueText(sbAttrsValue.progress)
             }
             "sbv_allow_touch_step_to" -> {
-                sbAttrsValue.max = myStepBarView.maxCount
-                sbAttrsValue.progress = myStepBarView.allowTouchStepTo
+                sbAttrsValue.max = my_stepBarView4.maxCount
+                sbAttrsValue.progress = my_stepBarView4.allowTouchStepTo
                 refreshValueText(sbAttrsValue.progress)
             }
         }
@@ -143,25 +156,25 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
     private fun refreshProgress(progress: Int) {
         when(actionsList[spActions.selectedItemPosition]){
             "sbv_max_count" -> {
-                myStepBarView.maxCount= progress+2
+                my_stepBarView4.maxCount= progress+2
             }
             "sbv_steps_line_height" -> {
-                myStepBarView.stepsLineHeight = DpHandler.dpToPx(this@MainActivity,progress).toFloat()
+                my_stepBarView4.stepsLineHeight = DpHandler.dpToPx(this@MainActivity,progress).toFloat()
             }
             "sbv_steps_size" -> {
-                myStepBarView.stepsSize = DpHandler.dpToPx(this@MainActivity,progress).toFloat()
+                my_stepBarView4.stepsSize = DpHandler.dpToPx(this@MainActivity,progress).toFloat()
             }
             "sbv_steps_text_size" -> {
-                myStepBarView.stepsTextSize = DpHandler.spToPx(this,progress.toFloat())
+                my_stepBarView4.stepsTextSize = DpHandler.spToPx(this,progress.toFloat())
             }
             "sbv_steps_line_margin_left" -> {
-                myStepBarView.stepsLineMarginLeft = DpHandler.dpToPx(this@MainActivity,progress).toFloat()
+                my_stepBarView4.stepsLineMarginLeft = DpHandler.dpToPx(this@MainActivity,progress).toFloat()
             }
             "sbv_steps_line_margin_right" -> {
-                myStepBarView.stepsLineMarginRight = DpHandler.dpToPx(this@MainActivity,progress).toFloat()
+                my_stepBarView4.stepsLineMarginRight = DpHandler.dpToPx(this@MainActivity,progress).toFloat()
             }
             "sbv_allow_touch_step_to" -> {
-                myStepBarView.allowTouchStepTo = progress
+                my_stepBarView4.allowTouchStepTo = progress
             }
         }
     }

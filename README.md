@@ -9,7 +9,7 @@ You can use this library to have a step bar
 
 can be used in pages that you have some steps to reach
 
-you can download the [Demo apk file](https://github.com/imaNNeoFighT/StepBarView/raw/master/repo_files/SbvDemo1-0-3.apk) (you can first adjust your StepBar in the demoApp and then implement it in code)
+you can download the [Demo apk file](https://github.com/imaNNeoFighT/StepBarView/raw/master/repo_files/SbvDemo1-0-4.apk) (you can first adjust your StepBar in the demoApp and then implement it in code)
 
 <img src="./repo_files/images/demoo.gif" width="300">
 

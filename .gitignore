@@ -8,7 +8,7 @@
 /captures
 .externalNativeBuild
 
-
+app/release/*
 
 # Built application files
 #*.apk
@@ -53,9 +53,6 @@ captures/
 .idea/libraries
 .idea
 	
-
-# Keystore files
-*.jks
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild

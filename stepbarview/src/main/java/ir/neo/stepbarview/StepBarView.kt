@@ -140,7 +140,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
-    var showStepName: Boolean = true
+    var showStepName: Boolean = false
         set(value) {
             field = value
             invalidate()

@@ -73,7 +73,7 @@ you can customize StepBarView, all of this attributes can change via xml or code
 |sbv_steps_line_margin_left|Dimensions|`stepsLineMarginLeft`|steps line margin left (gap in left of lines), default value is `2dp`|
 |sbv_steps_line_margin_right|Dimensions|`stepsLineMarginRight`|steps line margin right (gap in right of lines), default value is `2dp`|
 |sbv_allow_touch_step_to|Integer|`allowTouchStepTo`|allow touch to reach step (for example if you set 3 you can touch to reach step to 3 and not more), default value is `8`|
-|sbv_show_step_index|Integer|`showStepIndex`|you can set this property false to prevent showing indexes (then just a solid circle will be drawn), default value is `true`|
+|sbv_show_step_index|Boolean|`showStepIndex`|you can set this property false to prevent showing indexes (then just a solid circle will be drawn), default value is `true`|
 |sbv_steps_stroke_size|Dimensions|`stepsStrokeSize`| Stroke Size of steps , default value is `2dp`|
 |sbv_steps_stroke_reached_color|Color|`stepsStrokeReachedColor`| Stroke color of reached steps|
 |sbv_steps_stroke_unreached_color|Color|`stepsStrokeUnReachedColor`| Stroke color of unReached steps|

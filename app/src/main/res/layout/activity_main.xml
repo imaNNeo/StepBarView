@@ -24,13 +24,12 @@
         app:sbv_steps_line_reached_colors="#0f0"
         app:sbv_steps_line_unreached_colors="#52005f00"
         app:sbv_steps_unreached_colors="#52005f00"
-        app:sbv_steps_text_color="#000"
+        app:sbv_steps_text_color="#b900c2"
         app:sbv_max_count="6"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         app:sbv_show_step_stroke="true"
         app:sbv_is_rtl="true"
-        app:sbv_show_step_name="true"
         />
 
     <ir.neo.stepbarview.StepBarView
@@ -49,11 +48,12 @@
         app:sbv_steps_line_reached_colors="#000369"
         app:sbv_steps_line_unreached_colors="#600000"
         app:sbv_steps_line_height="20dp"
-        app:sbv_steps_text_color="#fff"
+        app:sbv_steps_text_color="#000"
         app:sbv_max_count="3"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         app:sbv_show_step_index="false"
+        app:sbv_show_step_name="true"
         />
 
 

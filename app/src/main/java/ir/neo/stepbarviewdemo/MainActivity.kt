@@ -35,19 +35,19 @@ class MainActivity : AppCompatActivity() ,SeekBar.OnSeekBarChangeListener{
     }
 
     private fun initStepNames() {
-        my_stepBarView1.stepsTitleSetter = object : StepsTitleSetter {
+        my_stepBarView2.stepsTitleSetter = object : StepsTitleSetter {
             override fun getStepTitle(step: Int): String {
                 return when (step) {
                     1 -> "Fist"
-                    2 -> "Second"
+                    2 -> "2nd"
                     3 -> "Third"
-                    4 -> "Fourth"
+                    4 -> "4th"
                     5 -> "Fifth"
-                    6 -> "Sixth"
+                    6 -> "6th"
                     7 -> "Seventh"
-                    8 -> "Eighth"
+                    8 -> "8th"
                     9 -> "Ninth"
-                    10 -> "Tenth"
+                    10 -> "10th"
                     else -> "Non"
                 }
             }

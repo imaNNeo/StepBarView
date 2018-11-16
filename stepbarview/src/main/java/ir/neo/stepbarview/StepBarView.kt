@@ -189,7 +189,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     var stepsTitleSetter = object : StepsTitleSetter {
 
-        override fun getStepTitle(step: Int) = "Step ${step + 1}"
+        override fun getStepTitle(step: Int) = "Step ${step}"
 
     }
 

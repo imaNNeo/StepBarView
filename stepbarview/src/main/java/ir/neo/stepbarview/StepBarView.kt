@@ -182,6 +182,12 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
+    var isScrollable : Boolean = false
+        set(value) {
+            field = value
+            invalidate()
+        }
+
 
     var allowSelectStep = object : AllowSelectStep{
         override fun allowSelectStep(step: Int) = true
@@ -227,6 +233,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
         isRtl = false
 
+        isScrollable = false
+
         attrs.let {
             val a = mContext.obtainStyledAttributes(attrs, R.styleable.StepBarView)
 
@@ -262,6 +270,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             showStepStroke = a.getBoolean(R.styleable.StepBarView_sbv_show_step_stroke, showStepStroke)
 
             isRtl = a.getBoolean(R.styleable.StepBarView_sbv_is_rtl, isRtl)
+
+            isScrollable = a.getBoolean(R.styleable.StepBarView_sbv_is_rtl, isScrollable)
 
             a.recycle()
         }

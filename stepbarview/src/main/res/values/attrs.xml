@@ -22,6 +22,7 @@
         <attr name="sbv_steps_stroke_current_color" format="dimension"/>
         <attr name="sbv_show_step_stroke" format="boolean"/>
         <attr name="sbv_is_rtl" format="boolean"/>
+        <attr name="sbv_is_scrollable" format="boolean"/>
     </declare-styleable>
 
 </resources>

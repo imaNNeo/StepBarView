@@ -85,6 +85,50 @@ you can customize StepBarView, all of this attributes can change via xml or code
 |sbv_steps_line_width|Dimensions|`stepsLineWidth`|steps line width, default value is `24dp`, it will ignored when isFixedStepsLineWidth is false|
 
 
+## 3 - Some Samples
+
+### Scrollable Sample
+To achieve scrollable View just set isFixedStepsLineWidth : true, and put this view inside a HorizontalScrollView,
+
+just like this :
+```
+<HorizontalScrollView
+        android:id="@+id/stepBar3Container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/my_stepBarView2"
+        app:layout_constraintBottom_toTopOf="@+id/my_stepBarView4"
+        android:scrollbarSize="0dp"
+        >
+
+        <ir.neo.stepbarview.StepBarView
+            android:id="@+id/my_stepBarView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sbv_steps_size="28dp"
+            app:sbv_steps_reached_colors="#fff"
+            app:sbv_steps_line_reached_colors="#fff"
+            app:sbv_steps_line_unreached_colors="#dbcecece"
+            app:sbv_steps_unreached_colors="#dbcecece"
+            app:sbv_steps_text_color="#f0f"
+            app:sbv_max_count="15"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:background="#f0f"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:sbv_is_fixed_steps_line_width="true"
+            app:sbv_steps_line_width="80dp"
+            />
+
+    </HorizontalScrollView>
+```
+
+<img src="./repo_files/images/scrollable_sample.gif" width="300">
+
+
 # License
 ```
 Copyright 2018 Iman Khoshabi

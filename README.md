@@ -1,5 +1,5 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![APK](https://img.shields.io/badge/APK-Demo-brightgreen.svg)](https://github.com/imaNNeoFighT/StepBarView/raw/master/repo_files/SbvDemo1-0-5.apk)
+[![APK](https://img.shields.io/badge/APK-Demo-brightgreen.svg)](https://github.com/imaNNeoFighT/StepBarView/raw/master/repo_files/SbvDemo1-1-0.apk)
 [![](https://jitpack.io/v/imaNNeoFighT/StepBarView.svg)](https://jitpack.io/#imaNNeoFighT/StepBarView)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-StepBarView-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6931)
 
@@ -9,7 +9,7 @@ You can use this library to have a step bar
 
 can be used in pages that you have some steps to reach
 
-you can download the [Demo apk file](https://github.com/imaNNeoFighT/StepBarView/raw/master/repo_files/SbvDemo1-0-5.apk) (you can first adjust your StepBar in the demoApp and then implement it in code)
+you can download the [Demo apk file](https://github.com/imaNNeoFighT/StepBarView/raw/master/repo_files/SbvDemo1-1-0.apk) (you can first adjust your StepBar in the demoApp and then implement it in code)
 
 <img src="./repo_files/images/demoo.gif" width="300">
 

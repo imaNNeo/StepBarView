@@ -277,7 +277,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
             showStepStroke = a.getBoolean(R.styleable.StepBarView_sbv_show_step_stroke, showStepStroke)
 
-            isRtl = a.getBoolean(R.styleable.StepBarView_sbv_is_fixed_steps_line_width, isRtl)
+            isRtl = a.getBoolean(R.styleable.StepBarView_sbv_is_rtl, isRtl)
 
             isFixedStepsLineWidth = a.getBoolean(R.styleable.StepBarView_sbv_is_fixed_steps_line_width, isFixedStepsLineWidth)
 
@@ -503,7 +503,6 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         }
 
     }
-
 
     override fun onSaveInstanceState(): Parcelable {
         val superState = super.onSaveInstanceState()

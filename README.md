@@ -81,6 +81,8 @@ you can customize StepBarView, all of this attributes can change via xml or code
 |sbv_show_step_stroke|Boolean|`showStepStroke`| flag to showing the Stroke or not!, default is false|
 |sbv_is_rtl|Boolean|`isRtl`| flag to showing steps in RTL (Right to left), default is false|
 |sbv_show_step_name|Boolean|`showStepName`| flag to show title below the steps, default is false|
+|sbv_is_fixed_steps_line_width|Boolean|`isFixedStepsLineWidth`| flag to specify that the line widths is fixed or it should calculate depends on View width (use it when you want to achieve scrollable view)|
+|sbv_steps_line_width|Dimensions|`stepsLineWidth`|steps line width, default value is `24dp`, it will ignored when isFixedStepsLineWidth is false|
 
 
 # License

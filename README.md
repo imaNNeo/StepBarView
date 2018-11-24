@@ -91,6 +91,9 @@ you can customize StepBarView, all of this attributes can change via xml or code
 To achieve scrollable View just set isFixedStepsLineWidth : true, and put this view inside a HorizontalScrollView,
 
 just like this :
+
+<img src="./repo_files/images/scrollable_sample.gif" width="300">
+
 ```
 <HorizontalScrollView
         android:id="@+id/stepBar3Container"
@@ -123,10 +126,8 @@ just like this :
             app:sbv_steps_line_width="80dp"
             />
 
-    </HorizontalScrollView>
+</HorizontalScrollView>
 ```
-
-<img src="./repo_files/images/scrollable_sample.gif" width="300">
 
 
 # License

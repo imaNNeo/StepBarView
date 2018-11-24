@@ -182,7 +182,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
-    var isScrollable : Boolean = false
+    var isFixedStepsLineWidth : Boolean = false
         set(value) {
             field = value
             invalidate()
@@ -233,7 +233,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
         isRtl = false
 
-        isScrollable = false
+        isFixedStepsLineWidth = false
 
         attrs.let {
             val a = mContext.obtainStyledAttributes(attrs, R.styleable.StepBarView)
@@ -269,9 +269,9 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
             showStepStroke = a.getBoolean(R.styleable.StepBarView_sbv_show_step_stroke, showStepStroke)
 
-            isRtl = a.getBoolean(R.styleable.StepBarView_sbv_is_rtl, isRtl)
+            isRtl = a.getBoolean(R.styleable.StepBarView_sbv_is_fixed_steps_line_width, isRtl)
 
-            isScrollable = a.getBoolean(R.styleable.StepBarView_sbv_is_rtl, isScrollable)
+            isFixedStepsLineWidth = a.getBoolean(R.styleable.StepBarView_sbv_is_fixed_steps_line_width, isFixedStepsLineWidth)
 
             a.recycle()
         }

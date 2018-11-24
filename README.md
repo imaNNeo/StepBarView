@@ -88,7 +88,7 @@ you can customize StepBarView, all of this attributes can change via xml or code
 ## 3 - Some Samples
 
 ### Scrollable Sample
-To achieve scrollable View just set `isFixedStepsLineWidth : true`, and put this view inside a HorizontalScrollView,
+To achieve scrollable View just set `isFixedStepsLineWidth : true`, and put this view inside a `HorizontalScrollView`,
 
 just like this :
 

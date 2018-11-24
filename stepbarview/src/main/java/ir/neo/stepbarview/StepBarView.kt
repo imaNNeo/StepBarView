@@ -188,6 +188,12 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
+    var stepsLineWidth : Float = 0f
+        set(value) {
+            field = value
+            invalidate()
+        }
+
 
     var allowSelectStep = object : AllowSelectStep{
         override fun allowSelectStep(step: Int) = true
@@ -235,6 +241,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
         isFixedStepsLineWidth = false
 
+        stepsLineWidth = DpHandler.dpToPx(context, 24).toFloat()
+
         attrs.let {
             val a = mContext.obtainStyledAttributes(attrs, R.styleable.StepBarView)
 
@@ -272,6 +280,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             isRtl = a.getBoolean(R.styleable.StepBarView_sbv_is_fixed_steps_line_width, isRtl)
 
             isFixedStepsLineWidth = a.getBoolean(R.styleable.StepBarView_sbv_is_fixed_steps_line_width, isFixedStepsLineWidth)
+
+            stepsLineWidth = a.getDimension(R.styleable.StepBarView_sbv_steps_line_width, stepsLineWidth)
 
             a.recycle()
         }

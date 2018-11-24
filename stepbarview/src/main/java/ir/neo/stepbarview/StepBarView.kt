@@ -3,6 +3,7 @@ package ir.neo.stepbarview
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.PointF
 import android.graphics.Rect
 import android.graphics.RectF
 import android.os.Parcel
@@ -40,16 +41,26 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
     private val rawHeiht
         get() = Math.max(stepsSize,stepsLineHeight)
 
+    private val rawWidth
+        get() =
+            (linesWidth * (maxCount - 1)) + // Lines Width
+            ((stepsLineMarginLeft + stepsLineMarginRight) * (maxCount - 1)) + // Lines Margins
+            ((stepsSize + stepsStrokeSize) * maxCount)
+
 
     //Lines between steps will drawn based on this variable
     //Note that now width is match_parent
     private val linesWidth : Float
         get() {
-            val allStepsSize = (maxCount * stepsSize)
-            val allMarginsSize = ((maxCount-1) * (stepsLineMarginLeft + stepsLineMarginRight))
-            val width = width - paddingLeft - paddingRight
-            val available = (width - allStepsSize - allMarginsSize)
-            return available/(maxCount-1)
+            return if (isFixedStepsLineWidth) {
+                stepsLineWidth
+            } else {
+                val allStepsSize = (maxCount * stepsSize)
+                val allMarginsSize = ((maxCount-1) * (stepsLineMarginLeft + stepsLineMarginRight))
+                val width = width - paddingLeft - paddingRight
+                val available = (width - allStepsSize - allMarginsSize)
+                available / (maxCount-1)
+            }
         }
 
     //This property used in drawing stuff
@@ -322,15 +333,20 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         val heightMeasureSize = MeasureSpec.getSize(heightMeasureSpec)
 
 
-
-        val mWidth = widthMeasureSize
+        val mWidth : Float = if (isFixedStepsLineWidth) {
+            calculateDesireWidth()
+        } else {
+            widthMeasureSize.toFloat()
+        }
         val mHeight = calculateDesireHeight()
 
-        setMeasuredDimension(mWidth, mHeight.toInt())
+        setMeasuredDimension(mWidth.toInt(), mHeight.toInt())
     }
 
 
-    private fun calculateDesireHeight() = rawHeiht + paddingTop + paddingBottom + titleTextHeight()
+    private fun calculateDesireHeight() : Float = rawHeiht + paddingTop + paddingBottom + titleTextHeight()
+    private fun calculateDesireWidth() : Float = rawWidth + paddingLeft + paddingRight
+
 
     //To include the steps name height when onMeasure is called
     //if showStepName is false, this is 0
@@ -451,10 +467,29 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     }
 
+    private var touchDownPoint = PointF()
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         when(event?.action){
-            MotionEvent.ACTION_DOWN,
-            MotionEvent.ACTION_MOVE -> handleTouchPost(event.x,event.y)
+            MotionEvent.ACTION_DOWN -> {
+                if (isFixedStepsLineWidth) {
+                    touchDownPoint.set(event.x, event.y)
+                } else {
+                    handleTouchPost(event.x, event.y)
+                }
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (isFixedStepsLineWidth) {
+                    return false
+                } else {
+                    handleTouchPost(event.x, event.y)
+                }
+            }
+            MotionEvent.ACTION_UP -> { //Click Happened
+                if (touchDownPoint.x == event.x &&
+                    touchDownPoint.y == event.y) {
+                    handleTouchPost(event.x, event.y)
+                }
+            }
         }
         return true
     }

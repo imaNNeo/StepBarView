@@ -41,9 +41,9 @@ Add the dependency to your app build.gradle file
 ```
 dependencies
 {
-    implementation  'com.github.imaNNeoFighT:StepBarView:1.0.5'
+    implementation  'com.github.imaNNeoFighT:StepBarView:1.1.0'
     // Or in older versions : 
-    // compile'com.github.imaNNeoFighT:StepBarView:1.0.5'
+    // compile'com.github.imaNNeoFighT:StepBarView:1.1.0'
 }
 ```
 

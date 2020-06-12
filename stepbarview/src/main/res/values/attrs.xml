@@ -17,9 +17,9 @@
         <attr name="sbv_show_step_index" format="boolean"/>
         <attr name="sbv_show_step_name" format="boolean"/>
         <attr name="sbv_steps_stroke_size" format="dimension"/>
-        <attr name="sbv_steps_stroke_reached_color" format="dimension"/>
-        <attr name="sbv_steps_stroke_unreached_color" format="dimension"/>
-        <attr name="sbv_steps_stroke_current_color" format="dimension"/>
+        <attr name="sbv_steps_stroke_reached_color" format="color"/>
+        <attr name="sbv_steps_stroke_unreached_color" format="color"/>
+        <attr name="sbv_steps_stroke_current_color" format="color"/>
         <attr name="sbv_show_step_stroke" format="boolean"/>
         <attr name="sbv_is_rtl" format="boolean"/>
         <attr name="sbv_is_fixed_steps_line_width" format="boolean"/>

@@ -5,11 +5,11 @@
 
 # Step Bar View
 
-You can use this library to have a step bar
+You can use this library to have a step bar.
 
-can be used in pages that you have some steps to reach
+It can be used in pages that you have some steps to reach.
 
-you can download the [Demo apk file](https://github.com/imaNNeoFighT/StepBarView/raw/master/repo_files/SbvDemo1-1-0.apk) (you can first adjust your StepBar in the demoApp and then implement it in code)
+You can download the [Demo apk file](https://github.com/imaNNeoFighT/StepBarView/raw/master/repo_files/SbvDemo1-1-0.apk) (you can first adjust your StepBar in the demoApp and then implement it in code).
 
 <img src="./repo_files/images/demoo.gif" width="300">
 
@@ -17,13 +17,13 @@ you can download the [Demo apk file](https://github.com/imaNNeoFighT/StepBarView
 
 ## 1 - Getting Started
 
-By this instructions you can add this library and i will explain how use it.
+By these instructions you can add this library and I will explain how to use it.
 
 
 
 ### Add Maven to your root build.gradle
 
-First of all Add it in your root build.gradle at the end of repositories:
+First of all add it in your root build.gradle at the end of the repositories:
 
 ```
 allprojects {
@@ -36,7 +36,7 @@ allprojects {
 
 ### Add Dependency
 
-Add the dependency to your app build.gradle file
+Add the dependency to your app build.gradle file.
 
 ```
 dependencies
@@ -47,7 +47,7 @@ dependencies
 }
 ```
 
-And then sync your gradle and take a tea.
+And then sync your gradle and have a cup of tea.
 
 
 ## 2 - About The View
@@ -56,7 +56,7 @@ just add ``StepBarView`` in your java code or xml.
 
 ## View Properties 
 
-you can customize StepBarView, all of this attributes can change via xml or code (runtime)
+You can customize StepBarView. All of this attributes can be changed via xml or code (runtime).
 
 
 |Attribute|Type|Kotlin|Description|
@@ -90,7 +90,7 @@ you can customize StepBarView, all of this attributes can change via xml or code
 ### Scrollable Sample
 To achieve scrollable View just set `isFixedStepsLineWidth : true`, and put this view inside a `HorizontalScrollView`,
 
-just like this :
+just like this:
 
 <img src="./repo_files/images/scrollable_sample.gif" width="300">
 

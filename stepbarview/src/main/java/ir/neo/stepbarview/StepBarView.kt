@@ -19,8 +19,8 @@ import android.view.View
  * iman.neofight@gmail.com
  */
 class StepBarView @JvmOverloads
-constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-        View(mContext,attrs, defStyleAttr) {
+constructor(mContext: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    View(mContext, attrs, defStyleAttr) {
 
     companion object {
         private val IS_DEBUG = false
@@ -29,48 +29,48 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         private val NAME_STEP_SEPARATION_PX = 10
     }
 
-    private var stepsPaint : Paint
-    private var stepsStrokePaint : Paint
-    private var stepsLinePaint : Paint
-    private var stepsTextPaint : Paint
+    private var stepsPaint: Paint
+    private var stepsStrokePaint: Paint
+    private var stepsLinePaint: Paint
+    private var stepsTextPaint: Paint
 
     private var tmpRect = Rect()
 
-    var onStepChangeListener : OnStepChangeListener? = null
+    var onStepChangeListener: OnStepChangeListener? = null
 
     private val rawHeiht
-        get() = Math.max(stepsSize,stepsLineHeight)
+        get() = Math.max(stepsSize, stepsLineHeight)
 
     private val rawWidth
         get() =
             (linesWidth * (maxCount - 1)) + // Lines Width
-            ((stepsLineMarginLeft + stepsLineMarginRight) * (maxCount - 1)) + // Lines Margins
-            ((stepsSize + stepsStrokeSize) * maxCount)
+                    ((stepsLineMarginLeft + stepsLineMarginRight) * (maxCount - 1)) + // Lines Margins
+                    ((stepsSize + stepsStrokeSize) * maxCount)
 
 
     //Lines between steps will drawn based on this variable
     //Note that now width is match_parent
-    private val linesWidth : Float
+    private val linesWidth: Float
         get() {
             return if (isFixedStepsLineWidth) {
                 stepsLineWidth
             } else {
                 val allStepsSize = (maxCount * stepsSize)
-                val allMarginsSize = ((maxCount-1) * (stepsLineMarginLeft + stepsLineMarginRight))
+                val allMarginsSize = ((maxCount - 1) * (stepsLineMarginLeft + stepsLineMarginRight))
                 val width = width - paddingLeft - paddingRight
                 val available = (width - allStepsSize - allMarginsSize)
-                available / (maxCount-1)
+                available / (maxCount - 1)
             }
         }
 
     //This property used in drawing stuff
     private val yPos
-        get() = ((rawHeiht/2) + paddingTop)
+        get() = ((rawHeiht / 2) + paddingTop)
 
 
-    var maxCount : Int = 0
+    var maxCount: Int = 0
         set(value) {
-            if(allowTouchStepTo == field)
+            if (allowTouchStepTo == field)
                 allowTouchStepTo = value
             field = value
             invalidate()
@@ -83,55 +83,55 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
-    var stepsReachedColor : Int = 0
+    var stepsReachedColor: Int = 0
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsUnreachedColor : Int = 0
+    var stepsUnreachedColor: Int = 0
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsLineReachedColor : Int = 0
+    var stepsLineReachedColor: Int = 0
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsLineUnreachedColor : Int = 0
+    var stepsLineUnreachedColor: Int = 0
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsLineHeight : Float = 0f
+    var stepsLineHeight: Float = 0f
         set(value) {
             field = value
             requestLayout()
         }
 
-    var stepsSize : Float = 0f
+    var stepsSize: Float = 0f
         set(value) {
             field = value
             requestLayout()
         }
 
-    var stepsTextColor : Int = 0
+    var stepsTextColor: Int = 0
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsTextSize : Float = 0f
+    var stepsTextSize: Float = 0f
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsLineMarginLeft : Float = 0f
+    var stepsLineMarginLeft: Float = 0f
         set(value) {
             field = value
             invalidate()
@@ -143,7 +143,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
-    var allowTouchStepTo : Int = 0
+    var allowTouchStepTo: Int = 0
 
     var showStepIndex: Boolean = true
         set(value) {
@@ -157,56 +157,56 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             invalidate()
         }
 
-    var stepsStrokeSize : Float = 0f
+    var stepsStrokeSize: Float = 0f
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsStrokeReachedColor : Int = 0
+    var stepsStrokeReachedColor: Int = 0
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsStrokeUnReachedColor : Int = 0
+    var stepsStrokeUnReachedColor: Int = 0
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsStrokeCurrentColor : Int = 0
+    var stepsStrokeCurrentColor: Int = 0
         set(value) {
             field = value
             invalidate()
         }
 
-    var showStepStroke : Boolean = true
+    var showStepStroke: Boolean = true
         set(value) {
             field = value
             invalidate()
         }
 
-    var isRtl : Boolean = false
+    var isRtl: Boolean = false
         set(value) {
             field = value
             invalidate()
         }
 
-    var isFixedStepsLineWidth : Boolean = false
+    var isFixedStepsLineWidth: Boolean = false
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsLineWidth : Float = 0f
+    var stepsLineWidth: Float = 0f
         set(value) {
             field = value
             invalidate()
         }
 
 
-    var allowSelectStep = object : AllowSelectStep{
+    var allowSelectStep = object : AllowSelectStep {
         override fun allowSelectStep(step: Int) = true
     }
 
@@ -220,31 +220,35 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         maxCount = 8
         reachedStep = 1
 
-        stepsReachedColor = ContextCompat.getColor(context,R.color.sbv_step_reached_color)
-        stepsUnreachedColor = ContextCompat.getColor(context,R.color.sbv_step_unreached_color)
+        stepsReachedColor = ContextCompat.getColor(context, R.color.sbv_step_reached_color)
+        stepsUnreachedColor = ContextCompat.getColor(context, R.color.sbv_step_unreached_color)
 
-        stepsLineReachedColor = ContextCompat.getColor(context,R.color.sbv_step_line_reached_color)
-        stepsLineUnreachedColor = ContextCompat.getColor(context,R.color.sbv_step_line_unreached_color)
+        stepsLineReachedColor = ContextCompat.getColor(context, R.color.sbv_step_line_reached_color)
+        stepsLineUnreachedColor =
+            ContextCompat.getColor(context, R.color.sbv_step_line_unreached_color)
 
-        stepsLineHeight = DpHandler.dpToPx(context,4).toFloat()
+        stepsLineHeight = DpHandler.dpToPx(context, 4).toFloat()
 
-        stepsSize = DpHandler.dpToPx(context,16).toFloat()
-        stepsTextColor = ContextCompat.getColor(context,R.color.sbv_step_text_color)
-        stepsTextSize = DpHandler.spToPx(context,14f)
+        stepsSize = DpHandler.dpToPx(context, 16).toFloat()
+        stepsTextColor = ContextCompat.getColor(context, R.color.sbv_step_text_color)
+        stepsTextSize = DpHandler.spToPx(context, 14f)
 
-        stepsLineMarginLeft = DpHandler.dpToPx(context,2).toFloat()
-        stepsLineMarginRight = DpHandler.dpToPx(context,2).toFloat()
+        stepsLineMarginLeft = DpHandler.dpToPx(context, 2).toFloat()
+        stepsLineMarginRight = DpHandler.dpToPx(context, 2).toFloat()
 
         allowTouchStepTo = maxCount
 
         showStepIndex = true
         showStepName = false
 
-        stepsStrokeSize = DpHandler.dpToPx(context,2).toFloat()
+        stepsStrokeSize = DpHandler.dpToPx(context, 2).toFloat()
 
-        stepsStrokeReachedColor = ContextCompat.getColor(context,R.color.sbv_step_stroke_reached_color)
-        stepsStrokeUnReachedColor = ContextCompat.getColor(context,R.color.sbv_step_stroke_unreached_color)
-        stepsStrokeCurrentColor = ContextCompat.getColor(context,R.color.sbv_step_stroke_current_color)
+        stepsStrokeReachedColor =
+            ContextCompat.getColor(context, R.color.sbv_step_stroke_reached_color)
+        stepsStrokeUnReachedColor =
+            ContextCompat.getColor(context, R.color.sbv_step_stroke_unreached_color)
+        stepsStrokeCurrentColor =
+            ContextCompat.getColor(context, R.color.sbv_step_stroke_current_color)
 
         showStepStroke = false
 
@@ -257,42 +261,76 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         attrs.let {
             val a = mContext.obtainStyledAttributes(attrs, R.styleable.StepBarView)
 
-            maxCount = a.getInt(R.styleable.StepBarView_sbv_max_count,maxCount)
+            maxCount = a.getInt(R.styleable.StepBarView_sbv_max_count, maxCount)
 
-            stepsReachedColor = a.getColor(R.styleable.StepBarView_sbv_steps_reached_colors,stepsReachedColor)
-            stepsUnreachedColor = a.getColor(R.styleable.StepBarView_sbv_steps_unreached_colors,stepsUnreachedColor)
+            stepsReachedColor =
+                a.getColor(R.styleable.StepBarView_sbv_steps_reached_colors, stepsReachedColor)
+            stepsUnreachedColor =
+                a.getColor(R.styleable.StepBarView_sbv_steps_unreached_colors, stepsUnreachedColor)
 
-            stepsLineReachedColor = a.getColor(R.styleable.StepBarView_sbv_steps_line_reached_colors,stepsLineReachedColor)
-            stepsLineUnreachedColor = a.getColor(R.styleable.StepBarView_sbv_steps_line_unreached_colors,stepsLineUnreachedColor)
+            stepsLineReachedColor = a.getColor(
+                R.styleable.StepBarView_sbv_steps_line_reached_colors,
+                stepsLineReachedColor
+            )
+            stepsLineUnreachedColor = a.getColor(
+                R.styleable.StepBarView_sbv_steps_line_unreached_colors,
+                stepsLineUnreachedColor
+            )
 
-            stepsLineHeight = a.getDimension(R.styleable.StepBarView_sbv_steps_line_height,stepsLineHeight)
+            stepsLineHeight =
+                a.getDimension(R.styleable.StepBarView_sbv_steps_line_height, stepsLineHeight)
 
-            stepsSize = a.getDimension(R.styleable.StepBarView_sbv_steps_size,stepsSize)
-            stepsTextColor = a.getColor(R.styleable.StepBarView_sbv_steps_text_color,stepsTextColor)
-            stepsTextSize = a.getDimensionPixelOffset(R.styleable.StepBarView_sbv_steps_text_size, stepsTextSize.toInt()).toFloat()
+            stepsSize = a.getDimension(R.styleable.StepBarView_sbv_steps_size, stepsSize)
+            stepsTextColor =
+                a.getColor(R.styleable.StepBarView_sbv_steps_text_color, stepsTextColor)
+            stepsTextSize = a.getDimensionPixelOffset(
+                R.styleable.StepBarView_sbv_steps_text_size,
+                stepsTextSize.toInt()
+            ).toFloat()
 
-            stepsLineMarginLeft = a.getDimension(R.styleable.StepBarView_sbv_steps_line_margin_left,stepsLineMarginLeft)
-            stepsLineMarginRight = a.getDimension(R.styleable.StepBarView_sbv_steps_line_margin_right,stepsLineMarginRight)
+            stepsLineMarginLeft = a.getDimension(
+                R.styleable.StepBarView_sbv_steps_line_margin_left,
+                stepsLineMarginLeft
+            )
+            stepsLineMarginRight = a.getDimension(
+                R.styleable.StepBarView_sbv_steps_line_margin_right,
+                stepsLineMarginRight
+            )
 
-            allowTouchStepTo = a.getInt(R.styleable.StepBarView_sbv_allow_touch_step_to,maxCount)
+            allowTouchStepTo = a.getInt(R.styleable.StepBarView_sbv_allow_touch_step_to, maxCount)
 
             showStepIndex = a.getBoolean(R.styleable.StepBarView_sbv_show_step_index, showStepIndex)
 
             showStepName = a.getBoolean(R.styleable.StepBarView_sbv_show_step_name, showStepName)
 
-            stepsStrokeSize = a.getDimension(R.styleable.StepBarView_sbv_steps_stroke_size,stepsStrokeSize)
+            stepsStrokeSize =
+                a.getDimension(R.styleable.StepBarView_sbv_steps_stroke_size, stepsStrokeSize)
 
-            stepsStrokeReachedColor = a.getColor(R.styleable.StepBarView_sbv_steps_stroke_reached_color,stepsStrokeReachedColor)
-            stepsStrokeUnReachedColor = a.getColor(R.styleable.StepBarView_sbv_steps_stroke_unreached_color,stepsStrokeUnReachedColor)
-            stepsStrokeCurrentColor = a.getColor(R.styleable.StepBarView_sbv_steps_stroke_current_color,stepsStrokeCurrentColor)
+            stepsStrokeReachedColor = a.getColor(
+                R.styleable.StepBarView_sbv_steps_stroke_reached_color,
+                stepsStrokeReachedColor
+            )
+            stepsStrokeUnReachedColor = a.getColor(
+                R.styleable.StepBarView_sbv_steps_stroke_unreached_color,
+                stepsStrokeUnReachedColor
+            )
+            stepsStrokeCurrentColor = a.getColor(
+                R.styleable.StepBarView_sbv_steps_stroke_current_color,
+                stepsStrokeCurrentColor
+            )
 
-            showStepStroke = a.getBoolean(R.styleable.StepBarView_sbv_show_step_stroke, showStepStroke)
+            showStepStroke =
+                a.getBoolean(R.styleable.StepBarView_sbv_show_step_stroke, showStepStroke)
 
             isRtl = a.getBoolean(R.styleable.StepBarView_sbv_is_rtl, isRtl)
 
-            isFixedStepsLineWidth = a.getBoolean(R.styleable.StepBarView_sbv_is_fixed_steps_line_width, isFixedStepsLineWidth)
+            isFixedStepsLineWidth = a.getBoolean(
+                R.styleable.StepBarView_sbv_is_fixed_steps_line_width,
+                isFixedStepsLineWidth
+            )
 
-            stepsLineWidth = a.getDimension(R.styleable.StepBarView_sbv_steps_line_width, stepsLineWidth)
+            stepsLineWidth =
+                a.getDimension(R.styleable.StepBarView_sbv_steps_line_width, stepsLineWidth)
 
             a.recycle()
         }
@@ -333,7 +371,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         val heightMeasureSize = MeasureSpec.getSize(heightMeasureSpec)
 
 
-        val mWidth : Float = if (isFixedStepsLineWidth) {
+        val mWidth: Float = if (isFixedStepsLineWidth) {
             calculateDesireWidth()
         } else {
             widthMeasureSize.toFloat()
@@ -344,33 +382,36 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
     }
 
 
-    private fun calculateDesireHeight() : Float = rawHeiht + paddingTop + paddingBottom + titleTextHeight()
-    private fun calculateDesireWidth() : Float = rawWidth + paddingLeft + paddingRight
+    private fun calculateDesireHeight(): Float =
+        rawHeiht + paddingTop + paddingBottom + titleTextHeight()
+
+    private fun calculateDesireWidth(): Float = rawWidth + paddingLeft + paddingRight
 
 
     //To include the steps name height when onMeasure is called
     //if showStepName is false, this is 0
-    private fun titleTextHeight() : Int {
+    private fun titleTextHeight(): Int {
         if (!showStepName) return 0
 
         stepsTextPaint.getTextBounds("sample", 0, "sample".length, tmpRect)
         return tmpRect.height() + NAME_STEP_SEPARATION_PX * 2
     }
-    private fun getHorizontalCirclesPosition() : FloatArray {
+
+    private fun getHorizontalCirclesPosition(): FloatArray {
         val stepsHorizontalPositions = FloatArray(maxCount)
         val linesSize = linesWidth
 
 
-        val range = when(isRtl) {
-            true -> maxCount-1 downTo 0
+        val range = when (isRtl) {
+            true -> maxCount - 1 downTo 0
             false -> 0 until maxCount
         }
-        for(i in range) {
+        for (i in range) {
             //This offset contains step circle and right line
             val oneStepOffset = stepsSize + stepsLineMarginLeft + linesSize + stepsLineMarginRight
             val offsetToDraw = paddingLeft + (i * oneStepOffset)
 
-            val pos = if(isRtl) (maxCount-1)-i else i
+            val pos = if (isRtl) (maxCount - 1) - i else i
             stepsHorizontalPositions[pos] = offsetToDraw + stepsSize / 2
         }
 
@@ -381,7 +422,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         super.onDraw(canvas)
         val linesSize = linesWidth
 
-        for(i in 0 until maxCount) {
+        for (i in 0 until maxCount) {
             if (IS_DEBUG) {
                 Log.d("SS", "drawing $i step")
             }
@@ -389,43 +430,44 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             val xPos = getHorizontalCirclesPosition()[i]
 
             //Draw Steps Line
-            if(i<maxCount-1){
+            if (i < maxCount - 1) {
                 stepsLinePaint.strokeWidth = stepsLineHeight
                 stepsLinePaint.color =
-                        if(i<reachedStep-1) stepsLineReachedColor
-                        else stepsLineUnreachedColor
+                    if (i < reachedStep - 1) stepsLineReachedColor
+                    else stepsLineUnreachedColor
 
                 val startXPoint =
-                        when(isRtl){
-                            true -> xPos - (stepsSize/2) - stepsLineMarginRight
-                            false -> xPos + (stepsSize/2) + stepsLineMarginLeft
-                        }
+                    when (isRtl) {
+                        true -> xPos - (stepsSize / 2) - stepsLineMarginRight
+                        false -> xPos + (stepsSize / 2) + stepsLineMarginLeft
+                    }
 
                 val endXPoint =
-                        when(isRtl){
-                            false -> startXPoint + linesSize
-                            true -> startXPoint - linesSize
-                        }
+                    when (isRtl) {
+                        false -> startXPoint + linesSize
+                        true -> startXPoint - linesSize
+                    }
 
                 canvas?.drawLine(
-                        startXPoint,
-                        yPos,
-                        endXPoint,
-                        yPos,
-                        stepsLinePaint
+                    startXPoint,
+                    yPos,
+                    endXPoint,
+                    yPos,
+                    stepsLinePaint
                 )
             }
 
             //Draw Steps Circle
-            stepsPaint.color = if(i<reachedStep) stepsReachedColor else stepsUnreachedColor
+            stepsPaint.color = if (i < reachedStep) stepsReachedColor else stepsUnreachedColor
             canvas?.drawCircle(
-                    xPos,
-                    yPos,
-                    (stepsSize/2),
-                    stepsPaint)
+                xPos,
+                yPos,
+                (stepsSize / 2),
+                stepsPaint
+            )
 
             //Draw Step Stroke
-            if(showStepStroke) {
+            if (showStepStroke) {
                 stepsStrokePaint.strokeWidth = stepsStrokeSize
                 stepsStrokePaint.color = when {
                     i + 1 < reachedStep -> stepsStrokeReachedColor
@@ -433,35 +475,38 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                     else -> stepsStrokeUnReachedColor
                 }
                 canvas?.drawCircle(
-                        xPos,
-                        yPos,
-                        (stepsSize / 2) - (stepsStrokePaint.strokeWidth / 2),
-                        stepsStrokePaint)
+                    xPos,
+                    yPos,
+                    (stepsSize / 2) - (stepsStrokePaint.strokeWidth / 2),
+                    stepsStrokePaint
+                )
             }
 
 
             //Draw Steps Index
-            if(showStepIndex) {
+            if (showStepIndex) {
                 stepsTextPaint.color = stepsTextColor
                 stepsTextPaint.textSize = stepsTextSize
                 val drawingText = (i + 1).toString()
                 stepsTextPaint.getTextBounds(drawingText, 0, drawingText.length, tmpRect)
                 canvas?.drawText(
-                        drawingText,
-                        xPos,
-                        (yPos + (tmpRect.height() / 2)),
-                        stepsTextPaint)
+                    drawingText,
+                    xPos,
+                    (yPos + (tmpRect.height() / 2)),
+                    stepsTextPaint
+                )
             }
 
             //Draw Steps Names
-            if(showStepName) {
+            if (showStepName) {
                 val name = stepsTitleSetter.getStepTitle(i + 1);
                 stepsTextPaint.getTextBounds(name, 0, name.length, tmpRect)
                 canvas?.drawText(
                     name,
                     xPos,
-                    yPos*2 + tmpRect.height() + NAME_STEP_SEPARATION_PX,
-                    stepsTextPaint)
+                    yPos * 2 + tmpRect.height() + NAME_STEP_SEPARATION_PX,
+                    stepsTextPaint
+                )
             }
         }
 
@@ -469,7 +514,7 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     private var touchDownPoint = PointF()
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        when(event?.action){
+        when (event?.action) {
             MotionEvent.ACTION_DOWN -> {
                 if (isFixedStepsLineWidth) {
                     touchDownPoint.set(event.x, event.y)
@@ -486,7 +531,8 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
             }
             MotionEvent.ACTION_UP -> { //Click Happened
                 if (touchDownPoint.x == event.x &&
-                    touchDownPoint.y == event.y) {
+                    touchDownPoint.y == event.y
+                ) {
                     handleTouchPost(event.x, event.y)
                 }
             }
@@ -496,51 +542,52 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
 
     private fun handleTouchPost(x: Float, y: Float) {
         val lineSize = linesWidth
-        for(i in 0 until getHorizontalCirclesPosition().size){
+        for (i in 0 until getHorizontalCirclesPosition().size) {
 
             //Disallow touch more than allowTouchStepTo
-            if(i >= allowTouchStepTo) continue
+            if (i >= allowTouchStepTo) continue
 
             //Disallow touch user prevent steps
-            if(!allowSelectStep.allowSelectStep(i+1)) continue
+            if (!allowSelectStep.allowSelectStep(i + 1)) continue
 
             val xDotPos = getHorizontalCirclesPosition()[i]
             val yDotPos = yPos
 
-            val stepHalf = stepsSize/2
+            val stepHalf = stepsSize / 2
 
             //verticalExtraSpace is the extra space for vertical touching
-            val verticalExtraSpace = (rawHeiht*2)
+            val verticalExtraSpace = (rawHeiht * 2)
 
             val leftArea =
-                    when(isRtl){
-                        false -> xDotPos-stepHalf-lineSize-stepsLineMarginRight
-                        true -> xDotPos-stepHalf-stepsLineMarginRight
-                    }
+                when (isRtl) {
+                    false -> xDotPos - stepHalf - lineSize - stepsLineMarginRight
+                    true -> xDotPos - stepHalf - stepsLineMarginRight
+                }
 
             val rightArea =
-                    when(isRtl){
-                        false -> xDotPos+stepHalf+stepsLineMarginLeft
-                        true -> xDotPos+stepHalf+stepsLineMarginLeft+lineSize
-                    }
+                when (isRtl) {
+                    false -> xDotPos + stepHalf + stepsLineMarginLeft
+                    true -> xDotPos + stepHalf + stepsLineMarginLeft + lineSize
+                }
 
             val stepArea = RectF(
-                    leftArea,
-                    yDotPos-stepHalf-verticalExtraSpace,
-                    rightArea,
-                    yDotPos+stepHalf+verticalExtraSpace
+                leftArea,
+                yDotPos - stepHalf - verticalExtraSpace,
+                rightArea,
+                yDotPos + stepHalf + verticalExtraSpace
             )
 
-            if(stepArea.contains(x, y)){
+            if (stepArea.contains(x, y)) {
                 //Touched Step (i+1)
-                reachedStep = (i+1)
+                reachedStep = (i + 1)
             }
         }
 
     }
 
-    override fun onSaveInstanceState(): Parcelable {
-        val superState = super.onSaveInstanceState()
+    override fun onSaveInstanceState(): Parcelable? {
+        val superState = super.onSaveInstanceState() ?: return null
+
         val ss = SavedState(superState)
         ss.maxCount = maxCount
         ss.reachedStep = reachedStep
@@ -590,36 +637,36 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
         isRtl = savedState.isRtl
     }
 
-    class SavedState : BaseSavedState{
-        companion object CREATOR : Parcelable.Creator<SavedState>{
+    class SavedState : BaseSavedState {
+        companion object CREATOR : Parcelable.Creator<SavedState> {
             override fun createFromParcel(source: Parcel?) = SavedState(source)
             override fun newArray(size: Int) = arrayOfNulls<SavedState?>(size)
         }
 
 
-        var maxCount : Int = 1
+        var maxCount: Int = 1
         var reachedStep: Int = 1
-        var stepsReachedColor : Int = 1
-        var stepsUnreachedColor : Int = 1
+        var stepsReachedColor: Int = 1
+        var stepsUnreachedColor: Int = 1
         var stepsLineReachedColor: Int = 1
         var stepsLineUnreachedColor: Int = 1
         var stepsLineHeight: Float = 1f
         var stepsSize: Float = 1f
         var stepsTextColor: Int = 1
-        var stepsTextSize : Float = 1f
-        var stepsLineMarginLeft : Float = 1f
-        var stepsLineMarginRight : Float = 1f
-        var allowTouchStepTo : Int = 1
+        var stepsTextSize: Float = 1f
+        var stepsLineMarginLeft: Float = 1f
+        var stepsLineMarginRight: Float = 1f
+        var allowTouchStepTo: Int = 1
         var showStepIndex: Boolean = true
-        var stepsStrokeSize : Float = 1f
-        var stepsStrokeReachedColor : Int = 1
-        var stepsStrokeUnReachedColor : Int = 1
-        var stepsStrokeCurrentColor : Int = 1
-        var showStepStroke : Boolean = false
-        var isRtl : Boolean = false
+        var stepsStrokeSize: Float = 1f
+        var stepsStrokeReachedColor: Int = 1
+        var stepsStrokeUnReachedColor: Int = 1
+        var stepsStrokeCurrentColor: Int = 1
+        var showStepStroke: Boolean = false
+        var isRtl: Boolean = false
 
         constructor(parcelable: Parcelable) : super(parcelable)
-        constructor(parcel : Parcel?) : super(parcel){
+        constructor(parcel: Parcel?) : super(parcel) {
             parcel?.let {
                 maxCount = it.readInt()
                 reachedStep = it.readInt()
@@ -634,13 +681,13 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                 stepsLineMarginLeft = it.readFloat()
                 stepsLineMarginRight = it.readFloat()
                 allowTouchStepTo = it.readInt()
-                showStepIndex = it.readInt()==1
+                showStepIndex = it.readInt() == 1
                 stepsStrokeSize = it.readFloat()
                 stepsStrokeReachedColor = it.readInt()
                 stepsStrokeUnReachedColor = it.readInt()
                 stepsStrokeCurrentColor = it.readInt()
-                showStepStroke = it.readInt()==1
-                isRtl = it.readInt()==1
+                showStepStroke = it.readInt() == 1
+                isRtl = it.readInt() == 1
             }
 
         }
@@ -662,26 +709,26 @@ constructor(mContext : Context, attrs: AttributeSet? = null, defStyleAttr: Int =
                 it.writeFloat(stepsLineMarginLeft)
                 it.writeFloat(stepsLineMarginRight)
                 it.writeInt(allowTouchStepTo)
-                it.writeInt(if(showStepIndex) 1 else 0)
+                it.writeInt(if (showStepIndex) 1 else 0)
                 it.writeFloat(stepsStrokeSize)
                 it.writeInt(stepsStrokeReachedColor)
                 it.writeInt(stepsStrokeUnReachedColor)
                 it.writeInt(stepsStrokeCurrentColor)
-                it.writeInt(if(showStepStroke) 1 else 0)
-                it.writeInt(if(isRtl) 1 else 0)
+                it.writeInt(if (showStepStroke) 1 else 0)
+                it.writeInt(if (isRtl) 1 else 0)
             }
         }
     }
 
-    interface OnStepChangeListener{
-        fun onStepChanged(currentStep:Int)
+    interface OnStepChangeListener {
+        fun onStepChanged(currentStep: Int)
     }
 
-    interface AllowSelectStep{
-        fun allowSelectStep(step: Int) : Boolean
+    interface AllowSelectStep {
+        fun allowSelectStep(step: Int): Boolean
     }
 
-    interface StepsTitleSetter{
-        fun getStepTitle(step: Int) : String
+    interface StepsTitleSetter {
+        fun getStepTitle(step: Int): String
     }
 }
